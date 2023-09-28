@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="estudiante")
@@ -23,6 +23,8 @@ public class EstudianteEntity {
 
     private String nombres;
     private String apellidos;
-    private Date fecha_nacimiento;
+    private LocalDate fecha_nacimiento;
     private int egreso_colegio;
+    private String nombre_colegio;
+    private String tipo_colegio;
 }
