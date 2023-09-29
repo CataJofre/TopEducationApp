@@ -19,11 +19,12 @@ public class ArancelEntity {
     @ManyToOne
     @JoinColumn(name ="rut_estudiante")
     private EstudianteEntity rut_estudiante;
-    private int dctos_iniciales;
     private int dcto_tipo_pago;
     private int dcto_tiempo_egreso;
     private int dcto_colegio_procedencia;
     private String tipo_de_pago;
     private int monto_pagar;
+    private int cantidad_cuotas;
+
 
 }

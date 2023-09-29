@@ -31,7 +31,7 @@ public class EstudianteController {
     @PostMapping("/estudiantes")
     public String guardarEstudiante(@ModelAttribute("estudiante")EstudianteEntity estudiante){
         estudianteService.crearEstudiante(estudiante);
-        return "redirect:/estudiantes";
+        return "redirect:/arancel/nuevo";
     }
 
 }

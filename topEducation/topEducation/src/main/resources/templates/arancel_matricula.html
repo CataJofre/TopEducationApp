@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Arancel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10 container justify-content-center card">
+            <br>
+            <h1 class="text-center">Ingreso de descuentos</h1>
+            <div class="card-body">
+                <form th:action="@{/arancel}" th:object="${arancel}" method="post">
+                    <div class="form-group">
+                        <label>Rut del estudiante:</label>
+                        <input type="number" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control" placeholder="Rut del estudiante" required>
+                    </div>
+                    <br>
+                    <label>Tipo de pago:</label>
+                    <select name="tipo_de_pago" id="tipo_de_pago" class="form-select" >
+                        <option selected></option>
+                        <option value="Contado">Contado</option>
+                        <option value="Cuotas">Cuotas</option>
+                    </select>
+                    <br>
+                    <!--Seleccion del tipo de pago, si se elige contado se obtiene 50% de descuento -->
+                    <label>% Descuento segun tipo de pago:</label>
+                    <select name="dcto_tipo_pago" id="dcto_tipo_pago" class="form-select" >
+                        <option selected></option>
+                        <option value="0">Cuotas: 0</option>
+                        <option value="50">Contado: 50%</option>
+                    </select>
+                    <br>
+                    <!-- estos descuentos y opciones son aplicados cuando se elige la opcion de cuotas -->
+                    <label>% Descuento por años de egreso:</label>
+                    <select name="dcto_tiempo_egreso" id="dcto_tiempo_egreso" class="form-select" >
+                        <option selected></option>
+                        <option value="15">1 año</option>
+                        <option value="8">1 - 2 años</option>
+                        <option value="4">3 - 4 años</option>
+                        <option value="0">5 o más años</option>
+                    </select>
+                    <br>
+                    <label>% Descuento segun colegio de procedencia:</label>
+                    <select name="dcto_colegio_procedencia" id="dcto_colegio_procedencia" class="form-select" >
+                        <option selected></option>
+                        <option value="20">Municipal: 20%</option>
+                        <option value="10">Subvencionado: 10%</option>
+                        <option value="0">Privado: 0</option>
+                    </select>
+                    <br>
+                    <div class="form-group">
+                        <label>Cantidad de cuotas:</label>
+                        <input type="number" name="cantidad_cuotas" id="cantidad_cuotas" th:field="*{cantidad_cuotas}" class="form-control" placeholder="Cantidad de cuotas" required>
+                    </div>
+                    <br>
+                    <div class="box-footer">
+                        <button class="btn btn-success">Guardar datos</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Agregar eventos change a los campos relevantes
+document.getElementById("tipo_de_pago").addEventListener("change", function() {
+    var tipoPago = this.value;
+
+    // Obtener los elementos de los campos que deseas habilitar o bloquear
+    var dctoTiempoEgreso = document.getElementById("dcto_tiempo_egreso");
+    var dctoColegioProcedencia = document.getElementById("dcto_colegio_procedencia");
+    var cantidadCuotas = document.getElementById("cantidad_cuotas");
+    var tipoColegioProcedencia = document.getElementById("tipo_colegio_procedencia");
+
+    // Habilitar o bloquear los campos según la elección del usuario
+    if (tipoPago === "Contado") {
+        dctoTiempoEgreso.disabled = true;
+        dctoColegioProcedencia.disabled = true;
+        cantidadCuotas.disabled = true;
+    } else if (tipoPago === "Cuotas") {
+        dctoTiempoEgreso.disabled = false;
+        dctoColegioProcedencia.disabled = false;
+        cantidadCuotas.disabled = false;
+    }
+});
+
+// Agregar evento change al campo "Tipo de colegio de procedencia"
+document.getElementById("dcto_colegio_procedencia").addEventListener("change", function() {
+    var tipoColegio = this.value;
+    var cantidadCuotas = document.getElementById("cantidad_cuotas");
+
+    // Establecer los límites de cuotas según el tipo de colegio seleccionado
+    if (tipoColegio === "Municipal") {
+        cantidadCuotas.setAttribute("min", "2");
+        cantidadCuotas.setAttribute("max", "10");
+    } else if (tipoColegio === "Subvencionado") {
+        cantidadCuotas.setAttribute("min", "2");
+        cantidadCuotas.setAttribute("max", "7");
+    } else if (tipoColegio === "Privado") {
+        cantidadCuotas.setAttribute("min", "2");
+        cantidadCuotas.setAttribute("max", "4");
+    }
+});
+</script>
+</body>
+</html>

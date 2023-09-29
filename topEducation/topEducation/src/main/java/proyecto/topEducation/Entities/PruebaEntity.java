@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 @Entity
 @Table(name="prueba")
 @Data
@@ -21,6 +21,6 @@ public class PruebaEntity {
     @JoinColumn(name ="rut_estudiante")
     private EstudianteEntity rut_estudiante;
 
-    private Date fecha_examen;
+    private LocalDate fecha_examen;
     private int puntaje_obtenido;
 }

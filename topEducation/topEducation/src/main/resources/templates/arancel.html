@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Matricula</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <div class=" row">
+    <h1>Lista de todos los aranceles</h1>
+  </div>
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">rut</th>
+      <th scope="col">Descuento tipo de pago</th>
+      <th scope="col">Descuento tiempo de egreso</th>
+      <th scope="col">Descuento colegio de procedencia</th>
+      <th scope="col">Tipo de pago</th>
+      <th scope="col">Monto a pagar</th>
+      <th scope="col">Cantidad de cuotas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="arancel: ${arancel}">
+      <td th:text="${arancel.rut_estudiante}">rut</td>
+      <td th:text="${arancel.dcto_tipo_pago}">tipo</td>
+      <td th:text="${arancel.dcto_tiempo_egreso}">egreso</td>
+      <td th:text="${arancel.dcto_colegio_procedencia}">colegio</td>
+      <td  th:text="${arancel.tipo_de_pago}">tipo pago</td>
+      <td th:text="${arancel.monto_pagar}">monto</td>
+      <td th:text="${arancel.cantidad_cuotas}">cuotas</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+</html>
