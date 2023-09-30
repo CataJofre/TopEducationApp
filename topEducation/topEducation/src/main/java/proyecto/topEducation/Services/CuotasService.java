@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import proyecto.topEducation.Entities.ArancelEntity;
 import proyecto.topEducation.Entities.CuotasEntity;
+import proyecto.topEducation.Entities.EstudianteEntity;
 import proyecto.topEducation.Repositories.ArancelRepository;
 import proyecto.topEducation.Repositories.CuotasRepository;
 
@@ -36,5 +37,9 @@ public class CuotasService {
     }
     public List<CuotasEntity> obtenerCuotasPorArancel(ArancelEntity arancel) {
         return cuotasRepository.findByArancelId(arancel.getId_arancel());
+    }
+    public List<CuotasEntity> buscarCuotasPorRutEstudiante(EstudianteEntity cuotas) {
+        // Utiliza el repositorio JPA para buscar cuotas por Rut de estudiante
+        return cuotasRepository.findByRutEstudiante(cuotas.getRut_estudiante());
     }
 }

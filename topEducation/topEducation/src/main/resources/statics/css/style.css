@@ -1,0 +1,149 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e0b0ff;
+}
+
+header {
+  background-color: #ffffff;
+  padding: 10px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #800080;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+}
+
+ul li {
+  margin: 0 15px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.main-content {
+  width: 80%;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.info-box {
+  background-color: #ffffff;
+  width: 45%;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  color: #800080;
+}
+
+.info-box p {
+  color: #333;
+}
+.table th,
+.table td {
+  text-align: center;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0b0ff;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.card {
+  background-color: #ffffddf;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #800080;
+  color: #ffffff;
+}
+
+.form-control {
+  border-color: #800080;
+}
+
+.btn-success {
+  background-color: #800080;
+  border: none;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0b0ff;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #800080;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.table {
+  background-color: #ffffff;
+  border-color: #f67af6;
+}
+
+.table th,
+.table td {
+  color: #800080;
+}
+
+.table th {
+  text-align: center;
+}
+
+.table thead th {
+  background-color: #e26fe2;
+  color: #ffffff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+/* Estilos para la barra de búsqueda */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input.form-control {
+  border-color: #800080;
+}
+
+.input-group button.btn-primary {
+  background-color: #800080;
+  border-color: #800080;
+}

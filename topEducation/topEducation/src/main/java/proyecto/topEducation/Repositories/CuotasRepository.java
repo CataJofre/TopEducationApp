@@ -12,5 +12,8 @@ import java.util.List;
 public interface CuotasRepository extends JpaRepository<CuotasEntity, Long> {
     @Query("SELECT c FROM CuotasEntity c WHERE c.arancelId.id_arancel = :arancelId")
     List<CuotasEntity> findByArancelId(@Param("arancelId") Long arancelId);
+
+    @Query("SELECT c FROM CuotasEntity c WHERE c.rut_estudiante.rut_estudiante = :rut_estudiante")
+    List<CuotasEntity> findByRutEstudiante(@Param("rut_estudiante") Long rut_estudiante);
 }
 

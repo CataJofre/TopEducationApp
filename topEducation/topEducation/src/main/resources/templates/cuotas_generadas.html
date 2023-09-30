@@ -4,54 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Cuotas generadas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../statics/css/style.css">
 </head>
 <header>
     <nav>
         <div class="logo">TopEducation Finanzas</div>
         <ul>
-            <li><a href="#cuotas">Cuotas</a></li>
+            <li><a href="/cuotas">Cuotas</a></li>
             <li><a href="arancel.html">Aranceles</a></li>
             <li><a href="estudiantes.html">Estudiantes</a></li>
             <li><a href="#examenes">Examenes</a></li>
         </ul>
     </nav>
 </header>
+
 <body>
-<div class="container">
-    <div class="row">
-        <h1>Lista de cuotas generadas</h1>
-        <br>
+    <div class="container">
+        <div class="row">
+            <h1>Lista de cuotas</h1>
+            <br>
+        </div>
+        <div class="table-container">
+            <table class="table table-striped table-bordered ">
+                <thead>
+                    <tr>
+                        <th scope="col">N°Cuota</th>
+                        <th scope="col">Valor de la cuota</th>
+                        <th scope="col">Estado de cuota</th>
+                        <th scope="col">Fecha de pago</th>
+                        <th scope="col">Cuotas totales</th>
+                        <th scope="col">Interés aplicado por retraso</th>
+                        <th scope="col">Cuotas pagadas</th>
+                        <th scope="col">Descuento por promedio de exámenes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cuota : ${cuotas}">
+                        <td th:text="${cuota.id_cuotas}">id</td>
+                        <td th:text="${cuota.valor_de_cuota}">valor</td>
+                        <td th:text="${cuota.estado_cuota}">estado</td>
+                        <td th:text="${cuota.fecha_pago}">fecha</td>
+                        <td th:text="${cuota.cuotas_totales}">totales</td>
+                        <td th:text="${cuota.interes_aplicado}">interés</td>
+                        <td th:text="${cuota.cuotas_pagadas}">pagadas</td>
+                        <td th:text="${cuota.dcto_media_examenes}">media</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="table-container">
-        <table class="table table-striped table-bordered ">
-            <thead>
-            <tr>
-                <th scope="col">N°Cuota</th>
-                <th scope="col">Valor de la cuota</th>
-                <th scope="col">Estado de cuota</th>
-                <th scope="col">Fecha de pago</th>
-                <th scope="col">Cuotas totales</th>
-                <th scope="col">Interés aplicado por retraso</th>
-                <th scope="col">Cuotas pagadas</th>
-                <th scope="col">Descuento por promedio de exámenes</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="cuota : ${cuotas}">
-                <td th:text="${cuota.id_cuotas}">id</td>
-                <td th:text="${cuota.valor_de_cuota}">valor</td>
-                <td th:text="${cuota.estado_cuota}">estado</td>
-                <td th:text="${cuota.fecha_pago}">fecha</td>
-                <td th:text="${cuota.cuotas_totales}">totales</td>
-                <td th:text="${cuota.interes_aplicado}">interés</td>
-                <td th:text="${cuota.cuotas_pagadas}">pagadas</td>
-                <td th:text="${cuota.dcto_media_examenes}">media</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 </body>
+
 </html>
