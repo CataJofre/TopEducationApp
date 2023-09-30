@@ -14,12 +14,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CuotasEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id_cuotas;
     @ManyToOne
     @JoinColumn(name ="arancelId")
     private ArancelEntity arancelId;
+    @ManyToOne
+    @JoinColumn(name ="rut_estudiante")
+    private EstudianteEntity rut_estudiante;
     private String estado_cuota;
     private LocalDate fecha_pago;
     private int cuotas_totales;

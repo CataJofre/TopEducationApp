@@ -36,22 +36,22 @@ public class ArancelController {
         arancelService.generarCuotas(arancel);
         List<CuotasEntity> cuotas = cuotasService.obtenerCuotasPorArancel(arancel);
         model.addAttribute("cuotas", cuotas);
-        return "arancel_resultado";
-
+        return "cuotas_generadas";
 
     }
     @GetMapping("/arancel/{id}")
     public String obtenerCuotas(@PathVariable Long arancelId, Model model) {
         Optional<ArancelEntity> optionalArancel = arancelService.obtenerArancelPorId(arancelId);
-
         if (optionalArancel.isPresent()) {
             ArancelEntity arancel = optionalArancel.get();
             List<CuotasEntity> cuotas = cuotasService.obtenerCuotasPorArancel(arancel);
             model.addAttribute("cuota", cuotas);
-            return "arancel_resultado";
+            return "cuotas_generadas";
         } else {
             return "error";
         }
     }
+
+
 
 }

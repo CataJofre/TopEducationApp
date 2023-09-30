@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import proyecto.topEducation.Entities.ArancelEntity;
 import proyecto.topEducation.Entities.CuotasEntity;
+import proyecto.topEducation.Entities.EstudianteEntity;
 import proyecto.topEducation.Repositories.ArancelRepository;
 import proyecto.topEducation.Repositories.CuotasRepository;
 
@@ -38,6 +39,7 @@ public class ArancelService {
         return arancelRepository.findById(id);
     }
     public void generarCuotas(ArancelEntity arancel){
+        EstudianteEntity rut_estudiante= arancel.getRut_estudiante();
         int cantidadCuotas= arancel.getCantidad_cuotas();
         int dctoTipoColegio= arancel.getDcto_colegio_procedencia();
         int dctoTiempoEgreso= arancel.getDcto_tiempo_egreso();
@@ -64,6 +66,7 @@ public class ArancelService {
             cuota.setCuotas_pagadas(0);
             cuota.setValor_de_cuota(valorCuota);
             cuota.setDcto_media_examenes(0);
+            cuota.setRut_estudiante(rut_estudiante);
             cuotasRepository.save(cuota);
         }
 
