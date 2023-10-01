@@ -9,78 +9,94 @@
     <link rel="stylesheet" href="../statics/css/style.css">
 </head>
 <header>
-    <nav>
-        <div class="logo">TopEducation Finanzas</div>
-        <ul>
-            <li><a href="cuotas.html">Cuotas</a></li>
-            <li><a href="arancel.html">Aranceles</a></li>
-            <li><a href="estudiantes.html">Estudiantes</a></li>
-            <li><a href="#examenes">Examenes</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <a class="navbar-brand" href="/" style="font-size: 2 em; font-weight: bold; color: #88209B; margin-left: 10px;">TopEducation Finanzas</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/" style="color: #88209B;">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/cuotas" style="color: #88209B;">Cuotas</a>
+                <a class="nav-item nav-link" href="/arancel" style="color: #88209B;">Aranceles</a>
+                <a class="nav-item nav-link" href="/estudiantes" style="color: #88209B;">Estudiantes</a>
+                <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Examenes</a>
+                <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Pagar aquí</a>
+            </div>
+        </div>
     </nav>
 </header>
 
+<br>
+
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-md-10 col-sm-10 container justify-content-center card">
-                <br>
-                <h1 class="text-center">Ingreso de descuentos</h1>
-                <div class="card-body">
-                    <form th:action="@{/arancel}" th:object="${arancel}" method="post">
-                        <div class="form-group">
-                            <label>Rut del estudiante:</label>
-                            <input type="number" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control"
-                                placeholder="Rut del estudiante" required>
-                        </div>
-                        <br>
-                        <label>Tipo de pago:</label>
-                        <select name="tipo_de_pago" id="tipo_de_pago" class="form-select">
-                            <option value="Contado">Contado</option>
-                            <option value="Cuotas">Cuotas</option>
-                        </select>
-                        <br>
-                        <!--Seleccion del tipo de pago, si se elige contado se obtiene 50% de descuento -->
-                        <label>% Descuento segun tipo de pago:</label>
-                        <select name="dcto_tipo_pago" id="dcto_tipo_pago" class="form-select">
-                            <option value="0">Cuotas: 0</option>
-                            <option value="50">Contado: 50% ($750.000)</option>
-                        </select>
-                        <input type="hidden" name="monto_pagar" value="750000">
-                        <br>
-                        <!-- estos descuentos y opciones son aplicados cuando se elige la opcion de cuotas -->
-                        <label>% Descuento por años de egreso:</label>
-                        <select name="dcto_tiempo_egreso" id="dcto_tiempo_egreso" class="form-select">
-                            <option value="15">1 año</option>
-                            <option value="8">1 - 2 años</option>
-                            <option value="4">3 - 4 años</option>
-                            <option value="0">5 o más años</option>
-                        </select>
-                        <br>
-                        <label>% Descuento segun colegio de procedencia:</label>
-                        <select name="dcto_colegio_procedencia" id="dcto_colegio_procedencia" class="form-select">
-                            <option value="20">Municipal: 20%</option>
-                            <option value="10">Subvencionado: 10%</option>
-                            <option value="0">Privado: 0</option>
-                        </select>
-                        <br>
-                        <div class="form-group">
-                            <label>Cantidad de cuotas:</label>
-                            <input type="number" name="cantidad_cuotas" id="cantidad_cuotas"
-                                th:field="*{cantidad_cuotas}" class="form-control" placeholder="Cantidad de cuotas"
-                                required>
-                        </div>
-                        <br>
-                        <div class="box-footer">
-                            <button class="btn btn-success">Guardar datos</button>
-                        </div>
-                    </form>
-                </div>
+<body style="background-color: #ffffff; color: #88209B; padding: 20px;">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10 container justify-content-center card"
+             style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 20px;">
+            <h1 class="text-center" style="color: #88209B;">Ingreso de descuentos</h1>
+            <div class="card-body">
+                <form th:action="@{/arancel}" th:object="${arancel}" method="post">
+                    <div class="form-group">
+                        <label>Rut del estudiante:</label>
+                        <input type="number" name="rut_estudiante" th:field="*{rut_estudiante}"
+                               class="form-control" placeholder="Rut del estudiante" required>
+                    </div>
+                    <br>
+                    <label>Tipo de pago:</label>
+                    <select name="tipo_de_pago" id="tipo_de_pago" class="form-select"
+                            style="background-color: #ffffff; color: #88209B;">
+                        <option value="Contado">Contado</option>
+                        <option value="Cuotas">Cuotas</option>
+                    </select>
+                    <br>
+                    <!--Seleccion del tipo de pago, si se elige contado se obtiene 50% de descuento -->
+                    <label>% Descuento segun tipo de pago:</label>
+                    <select name="dcto_tipo_pago" id="dcto_tipo_pago" class="form-select"
+                            style="background-color: #ffffff; color: #88209B;">
+                        <option value="0">Cuotas: 0</option>
+                        <option value="50">Contado: 50% ($750.000)</option>
+                    </select>
+                    <input type="hidden" name="monto_pagar" value="750000">
+                    <br>
+                    <!-- estos descuentos y opciones son aplicados cuando se elige la opcion de cuotas -->
+                    <label>% Descuento por años de egreso:</label>
+                    <select name="dcto_tiempo_egreso" id="dcto_tiempo_egreso" class="form-select"
+                            style="background-color: #ffffff; color: #88209B;">
+                        <option value="15">1 año</option>
+                        <option value="8">1 - 2 años</option>
+                        <option value="4">3 - 4 años</option>
+                        <option value="0">5 o más años</option>
+                    </select>
+                    <br>
+                    <label>% Descuento segun colegio de procedencia:</label>
+                    <select name="dcto_colegio_procedencia" id="dcto_colegio_procedencia" class="form-select"
+                            style="background-color: #ffffff; color: #88209B;">
+                        <option value="20">Municipal: 20%</option>
+                        <option value="10">Subvencionado: 10%</option>
+                        <option value="0">Privado: 0</option>
+                    </select>
+                    <br>
+                    <div class="form-group">
+                        <label>Cantidad de cuotas:</label>
+                        <input type="number" name="cantidad_cuotas" id="cantidad_cuotas"
+                               th:field="*{cantidad_cuotas}" class="form-control" placeholder="Cantidad de cuotas"
+                               required>
+                    </div>
+                    <br>
+                    <div class="box-footer">
+                        <button class="btn btn-success" style="background-color: #88209B; color: #ffffff;">Guardar
+                            datos</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
         // Agregar eventos change a los campos relevantes
         document.getElementById("tipo_de_pago").addEventListener("change", function () {
             var tipoPago = this.value;

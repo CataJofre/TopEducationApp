@@ -54,13 +54,13 @@ public class ArancelService {
 
         arancel.setMonto_pagar((int)montoDespuesDescuento);
         arancel.setDcto_tipo_pago(0);
-
         LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaCuota = fechaActual.withDayOfMonth(5);
         for (int i = 0; i < cantidadCuotas; i++) {
             CuotasEntity cuota = new CuotasEntity();
             cuota.setArancelId(arancel);
             cuota.setEstado_cuota("Pendiente");
-            cuota.setFecha_pago(fechaActual.plusMonths(i));
+            cuota.setFecha_pago(fechaCuota.plusMonths(i));
             cuota.setCuotas_totales(cantidadCuotas);
             cuota.setInteres_aplicado(0);
             cuota.setCuotas_pagadas(0);
@@ -69,7 +69,6 @@ public class ArancelService {
             cuota.setRut_estudiante(rut_estudiante);
             cuotasRepository.save(cuota);
         }
-
     }
     public void pagoContado(ArancelEntity arancel){
         int montoDespuesDescuento = 1500000/2;

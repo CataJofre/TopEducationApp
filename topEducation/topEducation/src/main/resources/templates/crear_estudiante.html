@@ -9,53 +9,58 @@
     <link rel="stylesheet" href="../statics/css/style.css">
 </head>
 <header>
-    <nav>
-        <div class="logo">TopEducation Finanzas</div>
-        <ul>
-            <li><a href="cuotas.html">Cuotas</a></li>
-            <li><a href="arancel.html">Aranceles</a></li>
-            <li><a href="estudiantes.html">Estudiantes</a></li>
-            <li><a href="#examenes">Examenes</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <a class="navbar-brand" href="/" style="font-size: 2 em; font-weight: bold; color: #88209B; margin-left: 10px;">TopEducation Finanzas</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/" style="color: #88209B;">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/cuotas" style="color: #88209B;">Cuotas</a>
+                <a class="nav-item nav-link" href="/arancel" style="color: #88209B;">Aranceles</a>
+                <a class="nav-item nav-link" href="/estudiantes" style="color: #88209B;">Estudiantes</a>
+                <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Examenes</a>
+                <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Pagar aquí</a>
+            </div>
+        </div>
     </nav>
 </header>
 
+<br>
 <body>
     <br>
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-md-10 col-sm-10 container justify-content-center card">
+            <div class="col-lg-10 col-md-10 col-sm-10 container justify-content-center card" style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
                 <br>
-                <h1 class="text-center">Registro de estudiantes</h1>
+                <h1 class="text-center" style="color: #88209B;">Registro de estudiantes</h1>
                 <div class="card-body">
                     <form th:action="@{/estudiantes}" th:object="${estudiante}" method="post">
                         <div class="form-group">
-                            <label>Nombres:</label>
-                            <input type="text" name="nombres" th:field="*{nombres}" class="form-control"
-                                placeholder="Nombres del estudiante" required>
+                            <label style="color: #88209B;">Nombres:</label>
+                            <input type="text" name="nombres" th:field="*{nombres}" class="form-control" placeholder="Nombres del estudiante" required>
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Apellidos:</label>
-                            <input type="text" name="apellidos" th:field="*{apellidos}" class="form-control"
-                                placeholder="Apellidos del estudiante" required>
+                            <label style="color: #88209B;">Apellidos:</label>
+                            <input type="text" name="apellidos" th:field="*{apellidos}" class="form-control" placeholder="Apellidos del estudiante" required>
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Rut:</label>
-                            <input type="number" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control"
-                                placeholder="Rut del estudiante" required>
+                            <label style="color: #88209B;">Rut:</label>
+                            <input type="number" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control" placeholder="Rut del estudiante" required>
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Fecha de nacimiento:</label>
-                            <input type="date" name="fecha_nacimiento" th:field="*{fecha_nacimiento}"
-                                class="form-control" placeholder="Fecha de nacimiento del estudiante" required>
+                            <label style="color: #88209B;">Fecha de nacimiento:</label>
+                            <input type="date" name="fecha_nacimiento" th:field="*{fecha_nacimiento}" class="form-control" placeholder="Fecha de nacimiento del estudiante" required>
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Tipo de colegio de procedencia:</label>
-                            <select name="nombre_colegio" id="nombre_colegio" class="form-select">
+                            <label style="color: #88209B;">Tipo de colegio de procedencia:</label>
+                            <select name="tipo_colegio" id="tipo_colegio" class="form-select">
                                 <option value="Municipal">Municipal</option>
                                 <option value="Subvencionado">Subvencionado</option>
                                 <option value="Privado">Privado</option>
@@ -63,27 +68,24 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Nombre del colegio de procedencia:</label>
-                            <input type="text" name="tipo_colegio" th:field="*{tipo_colegio}" class="form-control"
-                                placeholder="Tipo de colegio" required>
+                            <label style="color: #88209B;">Nombre del colegio de procedencia:</label>
+                            <input type="text" name="nombre_colegio" th:field="*{nombre_colegio}" class="form-control" placeholder="Nombre de colegio" required>
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Año de egreso escolar:</label>
-                            <input type="number" name="egreso_colegio" th:field="*{egreso_colegio}" class="form-control"
-                                placeholder="Año de egreso" required>
+                            <label style="color: #88209B;">Año de egreso escolar:</label>
+                            <input type="number" name="egreso_colegio" th:field="*{egreso_colegio}" class="form-control" placeholder="Año de egreso" required>
                         </div>
                         <br>
                         <div class="box-footer">
-                            <button class="btn btn-success">Seleccionar Medio de pago</button>
+                            <button class="btn btn-success" style="background-color: #88209B; color: #ffffff; border: none;">Seleccionar Medio de pago</button>
                         </div>
                     </form>
                 </div>
             </div>
-
         </div>
-
     </div>
+
 </body>
 
 </html>

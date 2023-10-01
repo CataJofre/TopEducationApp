@@ -7,43 +7,111 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../statics/css/style.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
+        .main-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .info-box {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+            margin-bottom: 20px;
+        }
+
+        .info-box h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #88209B;
+        }
+
+        .info-box p {
+            font-size: 16px;
+            color: #555;
+        }
+        a {
+    text-decoration: none;
+    color: inherit; /* Para heredar el color del texto del contenedor */
+}
+    </style>
     <title>TopEducation Finanzas</title>
 </head>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <a class="navbar-brand" href="/" style="font-size: 2 em; font-weight: bold; color: #88209B; margin-left: 10px;">TopEducation Finanzas</a>
 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/" style="color: #88209B;">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/cuotas" style="color: #88209B;">Cuotas</a>
+                <a class="nav-item nav-link" href="/arancel" style="color: #88209B;">Aranceles</a>
+                <a class="nav-item nav-link" href="/estudiantes" style="color: #88209B;">Estudiantes</a>
+                <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Examenes</a>
+                <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Pagar aquí</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<br>
 <body>
-    <header>
-        <nav>
-            <div class="logo">TopEducation Finanzas</div>
-            <ul>
-                <li><a href="/cuotas">Cuotas</a></li>
-                <li><a href="arancel.html">Aranceles</a></li>
-                <li><a href="estudiantes.html">Estudiantes</a></li>
-                <li><a href="#examenes">Examenes</a></li>
-            </ul>
-        </nav>
-    </header>
+
 
     <section class="main-content">
-        <div class="info-box">
+        <a href="/estudiantes/nuevo" class="info-box">
+            <div >
+            <h2>Registrar nuevo estudiante</h2>
+            <p>Registro de nuevo estudiante.</p>
+        </div>
+        </a>
+        <a href="/cuotas" class="info-box">
+            <div >
+            <h2>Pagar Cuotas</h2>
+            <p>pago de cuotas.</p>
+        </div>
+        </a>
+        <a href="/cuotas" class="info-box">
+            <div >
             <h2>Cuotas de Estudiantes</h2>
             <p>Información sobre las cuotas de todos los estudiantes.</p>
         </div>
-
-        <div class="info-box">
+        </a>
+        <a href="/arancel" class="info-box">
+        <div >
             <h2>Aranceles</h2>
             <p>Aranceles vigentes para nuestros programas educativos.</p>
         </div>
+        </a>
 
-        <div class="info-box">
+            <a href="/estudiantes" class="info-box">
+                <div >
             <h2>Estudiantes</h2>
             <p>Información sobre los estudiantes y su progreso académico.</p>
         </div>
-
-        <div class="info-box">
+            </a>
+            <a href="/cuotas" class="info-box">
+                <div >
             <h2>Examenes Tomados</h2>
             <p>Resultados de los exámenes.</p>
         </div>
+            </a>
     </section>
 </body>
 

@@ -17,7 +17,7 @@ public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
 
-    @GetMapping({"/estudiantes","/"})
+    @GetMapping({"/estudiantes"})
     public String obtenerEstudiantes(Model modelo){
         modelo.addAttribute("estudiantes",estudianteService.obtenerEstudiantes());
         return "estudiantes";
