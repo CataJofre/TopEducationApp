@@ -22,7 +22,7 @@
                 <a class="nav-item nav-link" href="/arancel" style="color: #88209B;">Aranceles</a>
                 <a class="nav-item nav-link" href="/estudiantes" style="color: #88209B;">Estudiantes</a>
                 <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Examenes</a>
-                <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Pagar aquí</a>
+                <a class="nav-item nav-link" href="/pagar" style="color: #88209B;">Pagar aquí</a>
             </div>
         </div>
     </nav>
@@ -53,8 +53,8 @@
             <tr th:each="cuota : ${cuotas}">
                 <td th:text="${cuota.id_cuotas}">id</td>
                 <td th:text="${cuota.valor_de_cuota}">valor</td>
-                <td th:text="${cuota.estado_cuota}">estado</td>
-                <td th:text="${cuota.fecha_pago}">fecha</td>
+                <td th:text="${cuota.estadoCuota}">estado</td>
+                <td th:text="${cuota.fechaPago}">fecha</td>
                 <td th:text="${cuota.cuotas_totales}">totales</td>
                 <td th:text="${cuota.interes_aplicado}">interés</td>
                 <td th:text="${cuota.cuotas_pagadas}">pagadas</td>

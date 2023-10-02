@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>estudiantes</title>
+    <title>Aranceles</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../statics/css/style.css">
+
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
@@ -29,45 +30,23 @@
 </header>
 
 <br>
-
-<body style="background-color: #ffffff; color: #88209B; padding: 20px;">
-<div>
-    <h1 style="color: #88209B;">Ingresar nuevo estudiante a TopEducation</h1>
-    <a href="/estudiantes/nuevo" class="btn btn-success" style="background-color: #88209B; color: #ffffff;">Crear estudiante</a>
-</div>
-
-<br>
+<body>
 
 <div class="container">
-    <div class="row">
-        <h1 style="color: #88209B;">Lista de estudiantes</h1>
+    <div class=" row">
+        <h1 style="color: #88209B;">Ingrese el Rut del estudiante para registrar el pago de sus cuotas</h1>
+        <br>
     </div>
-    <table class="table table-striped table-bordered" style="background-color: #ffffff; border: 1px solid #88209B;">
-        <thead style="background-color: #88209B; color: #ffffff;">
-        <tr>
-            <th scope="col">rut</th>
-            <th scope="col">Nombres</th>
-            <th scope="col">Apellidos</th>
-            <th scope="col">Egreso</th>
-            <th scope="col">Fecha Nacimiento</th>
-            <th scope="col">tipo colegio</th>
-            <th scope="col">nombre colegio</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="estudiante: ${estudiantes}">
-            <td th:text="${estudiante.rut_estudiante}">Rut</td>
-            <td th:text="${estudiante.nombres}">Nombres</td>
-            <td th:text="${estudiante.apellidos}">Apellidos</td>
-            <td th:text="${estudiante.egreso_colegio}">Egreso</td>
-            <td th:text="${estudiante.fecha_nacimiento}">Fecha Nacimiento</td>
-            <td th:text="${estudiante.tipo_colegio}">tipo colegio</td>
-            <td th:text="${estudiante.nombre_colegio}">nombre colegio</td>
-        </tr>
-        </tbody>
-    </table>
+
+    <br>
+    <form th:action="@{/buscar-cuotas-pagar}" method="get">
+        <div class="input-group mb-3" style="background-color: #ffffff; border: 1px solid #88209B;">
+            <input type="text" class="form-control" name="rut_estudiante" placeholder="Buscar cuotas de un estudiante" aria-label="Búsqueda" aria-describedby="basic-addon2" style="color: #88209B; border: none; background-color: transparent;">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit" style="background-color: #88209B; color: #ffffff; border: none;">Buscar</button>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
-
-
 </html>

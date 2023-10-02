@@ -23,8 +23,8 @@ public class CuotasEntity {
     @ManyToOne
     @JoinColumn(name ="rut_estudiante")
     private EstudianteEntity rut_estudiante;
-    private String estado_cuota;
-    private LocalDate fecha_pago;
+    private String estadoCuota;
+    private LocalDate fechaPago;
     private int cuotas_totales;
     private int interes_aplicado;
     private int cuotas_pagadas;

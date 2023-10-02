@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Aranceles</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="../statics/css/style.css">
 
 </head>
@@ -30,38 +30,23 @@
 </header>
 
 <br>
+<body>
 
-<body style="background-color: #ffffff; color: #88209B; padding: 20px;">
 <div class="container">
-  <div class="row">
-    <h1 style="color: #88209B;">Lista de todos los aranceles</h1>
+  <div class=" row">
+    <h1 style="color: #88209B;">Ingrese el Rut del estudiante para generar sus cuotas de pago</h1>
+    <br>
   </div>
-  <table class="table table-striped table-bordered" style="background-color: #ffffff; border: 1px solid #88209B;">
-    <thead style="background-color: #88209B; color: #ffffff;">
-    <tr>
-      <th scope="col">rut</th>
-      <th scope="col">Descuento tipo de pago</th>
-      <th scope="col">Descuento tiempo de egreso</th>
-      <th scope="col">Descuento colegio de procedencia</th>
-      <th scope="col">Tipo de pago</th>
-      <th scope="col">Monto a pagar</th>
-      <th scope="col">Cantidad de cuotas</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="arancel: ${arancel}">
-      <td th:text="${arancel.rut_estudiante.rut_estudiante}">rut</td>
-      <td th:text="${arancel.dcto_tipo_pago}">tipo</td>
-      <td th:text="${arancel.dcto_tiempo_egreso}">egreso</td>
-      <td th:text="${arancel.dcto_colegio_procedencia}">colegio</td>
-      <td th:text="${arancel.tipo_de_pago}">tipo pago</td>
-      <td th:text="${arancel.monto_pagar}">monto</td>
-      <td th:text="${arancel.cantidad_cuotas}">cuotas</td>
-    </tr>
-    </tbody>
-  </table>
+
+  <br>
+  <form th:action="@{/generarCuotas}" method="post">
+    <div class="input-group mb-3" style="background-color: #ffffff; border: 1px solid #88209B;">
+      <input type="text" class="form-control" name="rut_estudiante" placeholder="Buscar cuotas de un estudiante" aria-label="Búsqueda" aria-describedby="basic-addon2" style="color: #88209B; border: none; background-color: transparent;">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit" style="background-color: #88209B; color: #ffffff; border: none;">Buscar</button>
+      </div>
+    </div>
+  </form>
 </div>
 </body>
-
-
 </html>

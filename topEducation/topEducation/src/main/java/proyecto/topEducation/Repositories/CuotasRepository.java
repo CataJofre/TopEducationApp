@@ -15,5 +15,8 @@ public interface CuotasRepository extends JpaRepository<CuotasEntity, Long> {
 
     @Query("SELECT c FROM CuotasEntity c WHERE c.rut_estudiante.rut_estudiante = :rut_estudiante")
     List<CuotasEntity> findByRutEstudiante(@Param("rut_estudiante") Long rut_estudiante);
+
+
+    List<CuotasEntity> findByEstadoCuota(String pendiente);
 }
 

@@ -3,14 +3,13 @@ package proyecto.topEducation.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import proyecto.topEducation.Entities.ArancelEntity;
-import proyecto.topEducation.Entities.CuotasEntity;
 import proyecto.topEducation.Services.ArancelService;
 import proyecto.topEducation.Services.CuotasService;
-
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping
@@ -31,25 +30,9 @@ public class ArancelController {
         return "arancel_matricula";
     }
     @PostMapping("/arancel")
-    public String guardarEstudiante(@ModelAttribute("arancel")ArancelEntity arancel,Model model){
+    public String guardarArancel(@ModelAttribute("arancel")ArancelEntity arancel, Model model){
         arancelService.crearArancel(arancel);
-        arancelService.generarCuotas(arancel);
-        List<CuotasEntity> cuotas = cuotasService.obtenerCuotasPorArancel(arancel);
-        model.addAttribute("cuotas", cuotas);
-        return "cuotas_generadas";
-
-    }
-    @GetMapping("/arancel/{id}")
-    public String obtenerCuotas(@PathVariable Long arancelId, Model model) {
-        Optional<ArancelEntity> optionalArancel = arancelService.obtenerArancelPorId(arancelId);
-        if (optionalArancel.isPresent()) {
-            ArancelEntity arancel = optionalArancel.get();
-            List<CuotasEntity> cuotas = cuotasService.obtenerCuotasPorArancel(arancel);
-            model.addAttribute("cuota", cuotas);
-            return "cuotas_generadas";
-        } else {
-            return "error";
-        }
+        return "generar_cuotas";
     }
 
 
