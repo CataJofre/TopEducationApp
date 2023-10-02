@@ -27,14 +27,33 @@ public class CuotasController {
         return "cuotas";
     }
 
-
-
     @GetMapping("/buscar-cuotas")
     public String buscarCuotasPorEstudiante(@RequestParam("rut_estudiante") EstudianteEntity rutEstudiante, Model model) {
-
         List<CuotasEntity> cuotas = cuotasService.buscarCuotasPorRutEstudiante(rutEstudiante);
         model.addAttribute("cuotas", cuotas);
         return "cuotas_generadas";
     }
+    @PostMapping("/procesar-vencidas")
+    public String procesarCuotasVencidas() {
+        cuotasService.procesarCuotasVencidas();
+        return "redirect:/cuotas";
+    }
+    @PostMapping("/registrar_pago")
+    public String registrarPago(@RequestParam("cuotas_pagadas") List<Long> cuotasPagadas) {
+        cuotasService.registrarPago(cuotasPagadas);
+        return "redirect:/cuotas";
+    }
+    @GetMapping("/buscar-cuotas-pagar")
+    public String buscarCuotasParaPagar(@RequestParam("rut_estudiante") EstudianteEntity rutEstudiante, Model model) {
+        List<CuotasEntity> cuotas = cuotasService.buscarCuotasPorRutEstudiante(rutEstudiante);
+        model.addAttribute("cuotas", cuotas);
+        return "pagar_cuotas";
+    }
+    @GetMapping("/pagar")
+    public String registrarPagoCuotas() {
+        return "pagar";
+    }
+
+
 
 }

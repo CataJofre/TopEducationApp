@@ -9,6 +9,7 @@ import proyecto.topEducation.Repositories.ArancelRepository;
 import proyecto.topEducation.Repositories.CuotasRepository;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,8 +65,49 @@ public class CuotasService {
             }
         }
 
+    }
+    public void procesarCuotasVencidas() {
+        LocalDate fechaActual = LocalDate.now();
+        List<CuotasEntity> cuotasPendientes = cuotasRepository.findByEstadoCuota("Pendiente"); // Obtener cuotas pendientes
 
+        for (CuotasEntity cuota : cuotasPendientes) {
+            LocalDate fechaPago = cuota.getFechaPago();
+            int mesesAtraso = Period.between(fechaPago, fechaActual).getMonths();
 
+            if (mesesAtraso > 0) {
+                // Aplicar intereses según la cantidad de meses de atraso
+                int interesPorcentaje = obtenerInteresPorMesesAtraso(mesesAtraso);
+                int valorConInteres = cuota.getValor_de_cuota()+cuota.getValor_de_cuota()*interesPorcentaje/100;
+
+                cuota.setInteres_aplicado(interesPorcentaje);
+                cuota.setValor_de_cuota(valorConInteres);
+                cuota.setEstadoCuota("Vencida");
+            }
+
+            cuotasRepository.save(cuota); // Guardar la cuota actualizada en la base de datos
+        }
+    }
+
+    private int obtenerInteresPorMesesAtraso(int mesesAtraso) {
+        if (mesesAtraso == 1) {
+            return 3; // 3% de interés para 1 mes de atraso
+        } else if (mesesAtraso == 2) {
+            return 6; // 6% de interés para 2 meses de atraso
+        } else if (mesesAtraso == 3) {
+            return 9; // 9% de interés para 3 meses de atraso
+        } else {
+            return 15; // 15% de interés para más de 3 meses de atraso
+        }
+    }
+    public void registrarPago(List<Long> cuotasPagadasIds) {
+        for (Long cuotaId : cuotasPagadasIds) {
+            CuotasEntity cuota = cuotasRepository.findById(cuotaId).orElse(null);
+            if (cuota != null) {
+                cuota.setEstadoCuota("Pagada");
+                cuota.setCuotas_pagadas(cuota.getCuotas_pagadas() + 1);
+                cuotasRepository.save(cuota);
+            }
+        }
     }
 
 }
