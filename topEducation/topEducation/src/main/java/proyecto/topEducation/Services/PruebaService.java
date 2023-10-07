@@ -18,6 +18,18 @@ import java.util.List;
 public class PruebaService {
     @Autowired
     PruebaRepository pruebaRepository;
+    public PruebaEntity crearPrueba(PruebaEntity prueba) {
+        return pruebaRepository.save(prueba);
+    }
+    public PruebaEntity obtenerPruebaPorId(Long id) {
+        return pruebaRepository.findById(id).orElse(null);
+    }
+    public PruebaEntity actualizarPrueba(PruebaEntity prueba) {
+        return pruebaRepository.save(prueba);
+    }
+    public List<PruebaEntity> obtenerTodasLasPruebas() {
+        return pruebaRepository.findAll();
+    }
     public void procesarArchivoCSV(MultipartFile file) throws IOException {
         // Leer el archivo CSV y guardar los datos en la base de datos
         List<PruebaEntity> pruebas = new ArrayList<>();
@@ -27,7 +39,6 @@ public class PruebaService {
                 String[] datos = line.split(",");
                 if (datos.length == 4) {
                     PruebaEntity prueba = new PruebaEntity();
-                    prueba.setId_prueba(Long.parseLong(datos[0]));
                     prueba.setRut_estudiante(new EstudianteEntity(datos[1]));
                     prueba.setPuntaje_obtenido(Integer.parseInt(datos[2]));
                     prueba.setFecha_examen(LocalDate.parse(datos[3]));
