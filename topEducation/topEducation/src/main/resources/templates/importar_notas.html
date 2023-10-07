@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Generación de cuotas</title>
+  <title>Importar Notas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="../statics/css/style.css">
@@ -34,19 +34,12 @@
 
 <div class="container">
   <div class=" row">
-    <h1 style="color: #88209B;">Ingrese el Rut del estudiante para generar sus cuotas de pago</h1>
+    <h1 style="color: #88209B;">Ingrese el archivo Excel con notas</h1>
     <br>
   </div>
-
-  <br>
-  <form th:action="@{/generarCuotas}" method="post">
-    <div class="input-group mb-3" style="background-color: #ffffff; border: 1px solid #88209B;">
-      <input type="text" class="form-control" name="rut_estudiante" placeholder="Buscar cuotas de un estudiante" aria-label="Búsqueda" aria-describedby="basic-addon2" style="color: #88209B; border: none; background-color: transparent;">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit" style="background-color: #88209B; color: #ffffff; border: none;">Buscar</button>
-      </div>
-    </div>
+  <form th:action="@{/cargar-archivo}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv" />
+    <button type="submit">Cargar Archivo</button>
   </form>
-</div>
 </body>
 </html>

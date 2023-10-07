@@ -21,6 +21,7 @@ public class ArancelEntity {
     private EstudianteEntity rut_estudiante;
     private int dcto_tipo_pago;
     private int dcto_tiempo_egreso;
+    private int dcto_media_examenes;
     private int dcto_colegio_procedencia;
     private String tipo_de_pago;
     private int monto_pagar;

@@ -27,4 +27,10 @@ public class EstudianteEntity {
     private int egreso_colegio;
     private String nombre_colegio;
     private String tipo_colegio;
+
+
+    public EstudianteEntity(String rutEstudiante) {
+        this.rut_estudiante = Long.parseLong(rutEstudiante);
+    }
+
 }

@@ -27,7 +27,7 @@ public class ArancelController {
     public String matricularEstudianteForm(Model modelo){
         ArancelEntity arancel= new ArancelEntity();
         modelo.addAttribute("arancel", arancel);
-        return "arancel_matricula";
+        return "arancel_descuentos";
     }
     @PostMapping("/arancel")
     public String guardarArancel(@ModelAttribute("arancel")ArancelEntity arancel, Model model){
