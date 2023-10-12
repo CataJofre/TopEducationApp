@@ -35,6 +35,7 @@
   <div class="container">
     <div class=" row">
       <h1>Lista de todas las cuotas</h1>
+     <h2>Antes de realizar cualquier operación, primero debe actualizar los datos.</h2>
       <br>
     </div>
     <form th:action="@{/procesar-vencidas}" method="post">
@@ -43,6 +44,13 @@
       </button>
     </form>
 <br>
+    <h1 style="color: #88209B;">Actualizar Planilla</h1>
+    <form th:action="@{/actualizar-planilla}" method="post">
+      <button type="submit" class="btn btn-primary" style="background-color: #88209B; color: #ffffff; border: none;">
+        Actualizar Planilla
+      </button>
+    </form>
+    <br>
     <form th:action="@{/buscar-cuotas}" method="get">
       <div class="input-group mb-3" style="background-color: #ffffff; border: 1px solid #88209B;">
         <input type="text" class="form-control" name="rut_estudiante" placeholder="¿Desea buscar cuotas de un estudiante?" aria-label="Búsqueda" aria-describedby="basic-addon2" style="color: #88209B; border: none; background-color: transparent;">

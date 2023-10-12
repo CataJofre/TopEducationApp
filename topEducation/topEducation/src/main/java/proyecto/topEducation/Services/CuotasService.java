@@ -7,6 +7,7 @@ import proyecto.topEducation.Entities.CuotasEntity;
 import proyecto.topEducation.Entities.EstudianteEntity;
 import proyecto.topEducation.Repositories.ArancelRepository;
 import proyecto.topEducation.Repositories.CuotasRepository;
+import proyecto.topEducation.Repositories.PruebaRepository;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -19,6 +20,8 @@ public class CuotasService {
     CuotasRepository cuotasRepository;
     @Autowired
     ArancelRepository arancelRepository;
+    @Autowired
+    PruebaService pruebaService;
 
     public List<CuotasEntity> getAllCuotas() {
         return cuotasRepository.findAll();
@@ -109,5 +112,22 @@ public class CuotasService {
             }
         }
     }
+    public void aplicarDescuentosEnCuotasPendientes() {
+        List<CuotasEntity> cuotasPendientes = cuotasRepository.findByEstadoCuota("Pendiente");
+        for (CuotasEntity cuota : cuotasPendientes) {
+            int descuentoEstudiante = cuota.getArancelId().getDcto_media_examenes();
+            double descuentoAplicado = (double) descuentoEstudiante;
+            cuota.setDcto_media_examenes(descuentoEstudiante);
+            double valorConDescuento = cuota.getValor_de_cuota() * (1 - descuentoAplicado / 100);
+            int valorRedondeado = (int) Math.round(valorConDescuento);
+            cuota.setValor_de_cuota(valorRedondeado);
+            cuotasRepository.save(cuota);
+        }
+    }
 
+
+
+    public void calcularDescuento(){
+        pruebaService.calcularPromedioYDescuentoPorMes();
+    }
 }

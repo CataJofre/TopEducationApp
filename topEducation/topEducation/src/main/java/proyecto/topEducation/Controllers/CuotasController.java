@@ -53,6 +53,11 @@ public class CuotasController {
         return "pagar";
     }
 
-
+    @PostMapping("/actualizar-planilla")
+    public String actualizarPlanilla() {
+        cuotasService.calcularDescuento();
+        cuotasService.aplicarDescuentosEnCuotasPendientes();
+        return "redirect:/cuotas";
+    }
 
 }
