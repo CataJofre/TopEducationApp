@@ -6,4 +6,5 @@ import proyecto.topEducation.Entities.EstudianteEntity;
 
 @Repository
 public interface EstudianteRepository extends JpaRepository<EstudianteEntity, Long> {
+    EstudianteEntity obtenerEstudiantePorId(long rut_estudiante);
 }

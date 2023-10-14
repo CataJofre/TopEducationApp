@@ -72,21 +72,16 @@ public class CuotasService {
     public void procesarCuotasVencidas() {
         LocalDate fechaActual = LocalDate.now();
         List<CuotasEntity> cuotasPendientes = cuotasRepository.findByEstadoCuota("Pendiente"); // Obtener cuotas pendientes
-
         for (CuotasEntity cuota : cuotasPendientes) {
             LocalDate fechaPago = cuota.getFechaPago();
             int mesesAtraso = Period.between(fechaPago, fechaActual).getMonths();
-
             if (mesesAtraso > 0) {
-                // Aplicar intereses según la cantidad de meses de atraso
                 int interesPorcentaje = obtenerInteresPorMesesAtraso(mesesAtraso);
                 int valorConInteres = cuota.getValor_de_cuota()+cuota.getValor_de_cuota()*interesPorcentaje/100;
-
                 cuota.setInteres_aplicado(interesPorcentaje);
                 cuota.setValor_de_cuota(valorConInteres);
                 cuota.setEstadoCuota("Vencida");
             }
-
             cuotasRepository.save(cuota); // Guardar la cuota actualizada en la base de datos
         }
     }
@@ -125,9 +120,36 @@ public class CuotasService {
         }
     }
 
-
-
     public void calcularDescuento(){
         pruebaService.calcularPromedioYDescuentoPorMes();
     }
+    //4
+    public LocalDate obtenerFechaUltimoPago(long estudiante) {
+        return cuotasRepository.findMaxFechaPagoByRutEstudianteAndEstadoCuota(estudiante, "Pagada");
+    }
+
+    //5
+    public int calcularSaldoPorPagar(long estudiante) {
+        return cuotasRepository.sumSaldoPorPagar(estudiante);
+    }
+
+    //6
+    public int calcularNroCuotasRetraso(long rutEstudiante) {
+        return cuotasRepository.countCuotasVencidasByRutEstudiante(rutEstudiante);
+    }
+
+    //10
+    public int calcularNroCuotasPagadas(long rutEstudiante) {
+        return cuotasRepository.countCuotasPagadasByRutEstudiante(rutEstudiante);
+    }
+    //11
+    public int calcularMontoTotalPagado(long estudiante) {
+        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
+        if (arancel.getTipo_de_pago().equals("Contado")) {
+            return 750000;
+        } else {
+            return cuotasRepository.sumMontoTotalPagadoByRutEstudiante(estudiante);
+        }
+    }
+
 }

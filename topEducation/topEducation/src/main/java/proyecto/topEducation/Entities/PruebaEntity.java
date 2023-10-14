@@ -20,7 +20,6 @@ public class PruebaEntity {
     @ManyToOne
     @JoinColumn(name ="rut_estudiante")
     private EstudianteEntity rut_estudiante;
-
     private LocalDate fecha_examen;
     private int puntaje_obtenido;
 }

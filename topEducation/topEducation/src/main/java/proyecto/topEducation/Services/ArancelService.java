@@ -3,6 +3,7 @@ package proyecto.topEducation.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import proyecto.topEducation.Entities.ArancelEntity;
+import proyecto.topEducation.Entities.EstudianteEntity;
 import proyecto.topEducation.Repositories.ArancelRepository;
 import proyecto.topEducation.Repositories.CuotasRepository;
 
@@ -41,5 +42,27 @@ public class ArancelService {
         return arancelRepository.findById(id);
     }
 
+    //2
+    public String obtenerTipoPago(long estudiante) {
+        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
+        return arancel.getTipo_de_pago();
+    }
+
+    //8
+    public int calcularMontoTotalArancel(long estudiante) {
+        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
+        if(arancel.getTipo_de_pago().equals( "Contado")){
+            return 750000 * (1-arancel.getDcto_media_examenes()/100);
+        }
+        else{
+            return arancel.getMonto_pagar() * (1-arancel.getDcto_media_examenes()/100);
+        }
+    }
+
+    //9
+    public int obtenerNroTotalCuotasPactadas(long estudiante) {
+        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
+        return arancel.getCantidad_cuotas();
+    }
 
 }
