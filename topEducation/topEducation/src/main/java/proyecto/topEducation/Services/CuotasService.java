@@ -124,26 +124,31 @@ public class CuotasService {
         pruebaService.calcularPromedioYDescuentoPorMes();
     }
     //4
-    public LocalDate obtenerFechaUltimoPago(long estudiante) {
+    public LocalDate obtenerFechaUltimoPago(Long estudiante) {
         return cuotasRepository.findMaxFechaPagoByRutEstudianteAndEstadoCuota(estudiante, "Pagada");
     }
 
     //5
-    public int calcularSaldoPorPagar(long estudiante) {
-        return cuotasRepository.sumSaldoPorPagar(estudiante);
-    }
+    public int calcularSaldoPorPagar(Long estudiante) {
 
+        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
+        if (arancel.getTipo_de_pago().equals("Contado")) {
+            return 0;
+        } else {
+            return cuotasRepository.sumSaldoPorPagar(estudiante);
+        }
+    }
     //6
-    public int calcularNroCuotasRetraso(long rutEstudiante) {
+    public int calcularNroCuotasRetraso(Long rutEstudiante) {
         return cuotasRepository.countCuotasVencidasByRutEstudiante(rutEstudiante);
     }
 
     //10
-    public int calcularNroCuotasPagadas(long rutEstudiante) {
+    public int calcularNroCuotasPagadas(Long rutEstudiante) {
         return cuotasRepository.countCuotasPagadasByRutEstudiante(rutEstudiante);
     }
     //11
-    public int calcularMontoTotalPagado(long estudiante) {
+    public int calcularMontoTotalPagado(Long estudiante) {
         ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
         if (arancel.getTipo_de_pago().equals("Contado")) {
             return 750000;

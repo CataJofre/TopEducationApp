@@ -33,10 +33,13 @@ public class EstudianteController {
         return "redirect:/arancel/nuevo";
     }
 
+    @GetMapping("/informacion_estudiante")
+    public String registrarPagoCuotas() {
+        return "informacion_estudiante";
+    }
 
-
-        @GetMapping("/mostrar-informacion")
-        public String mostrarInformacionEstudiante(@RequestParam("rut") long rutEstudiante, Model model) {
+        @GetMapping("/informacion")
+        public String mostrarInformacionEstudiante(@RequestParam("rut_estudiante") Long rutEstudiante, Model model) {
             String nombreEstudiante = estudianteService.obtenerNombreEstudiante(rutEstudiante);
             int nroExamenesRendidos = estudianteService.calcularNroExamenesRendidos(rutEstudiante);
             double promedioPuntajeExamenes = estudianteService.obtenerPromedioPuntajeExamenes(rutEstudiante);

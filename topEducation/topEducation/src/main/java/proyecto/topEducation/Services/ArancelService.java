@@ -43,13 +43,13 @@ public class ArancelService {
     }
 
     //2
-    public String obtenerTipoPago(long estudiante) {
+    public String obtenerTipoPago(Long estudiante) {
         ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
         return arancel.getTipo_de_pago();
     }
 
     //8
-    public int calcularMontoTotalArancel(long estudiante) {
+    public int calcularMontoTotalArancel(Long estudiante) {
         ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
         if(arancel.getTipo_de_pago().equals( "Contado")){
             return 750000 * (1-arancel.getDcto_media_examenes()/100);
@@ -60,7 +60,7 @@ public class ArancelService {
     }
 
     //9
-    public int obtenerNroTotalCuotasPactadas(long estudiante) {
+    public int obtenerNroTotalCuotasPactadas(Long estudiante) {
         ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
         return arancel.getCantidad_cuotas();
     }

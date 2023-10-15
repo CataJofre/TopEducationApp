@@ -78,6 +78,16 @@
 
 <br>
 <body>
+<form th:action="@{/informacion}" method="get" class="text-center">
+    <div class="input-group mb-3" style="max-width: 400px; margin: 0 auto;">
+        <input type="text" class="form-control" name="rut_estudiante" placeholder="¿Desea buscar información de un estudiante?" aria-label="Búsqueda" aria-describedby="basic-addon2" style="color: #88209B; border: none; background-color: transparent;">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit" style="background-color: #88209B; color: #ffffff; border: none;">Buscar</button>
+        </div>
+    </div>
+</form>
+
+<br>
 <section class="main-content">
     <!-- Información del estudiante -->
     <div class="info-box">

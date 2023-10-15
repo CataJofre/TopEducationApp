@@ -21,7 +21,7 @@
                 <a class="nav-item nav-link" href="/cuotas" style="color: #88209B;">Cuotas</a>
                 <a class="nav-item nav-link" href="/arancel" style="color: #88209B;">Aranceles</a>
                 <a class="nav-item nav-link" href="/estudiantes" style="color: #88209B;">Estudiantes</a>
-                <a class="nav-item nav-link" href="#examenes" style="color: #88209B;">Examenes</a>
+                <a class="nav-item nav-link" href="/examenes" style="color: #88209B;">Examenes</a>
                 <a class="nav-item nav-link" href="/pagar" style="color: #88209B;">Pagar aquí</a>
             </div>
         </div>
@@ -30,7 +30,7 @@
 
 <br>
 
-<body>
+
 <body style="background-color: #ffffff; color: #88209B; padding: 20px;">
 <div class="container">
     <div class="row">
@@ -40,14 +40,14 @@
             <div class="card-body">
                 <form th:action="@{/arancel}" th:object="${arancel}" method="post">
                     <div class="form-group">
-                        <label>Rut del estudiante:</label>
-                        <input type="number" name="rut_estudiante" th:field="*{rut_estudiante}"
-                               class="form-control" placeholder="Rut del estudiante" required>
+                        <label style="color: #88209B;">Rut: Si el RUT termina en k, reemplazar con 0.</label>
+                        <input type="text" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control" placeholder="Rut del estudiante, sin guion" required pattern="\d{9}" title="Ingresa 9 dígitos" maxlength="9">
                     </div>
                     <br>
                     <label>Tipo de pago:</label>
                     <select name="tipo_de_pago" id="tipo_de_pago" class="form-select"
                             style="background-color: #ffffff; color: #88209B;">
+                        <option value="" disabled selected readonly>Seleccione tipo de pago:</option>
                         <option value="Contado">Contado</option>
                         <option value="Cuotas">Cuotas</option>
                     </select>
@@ -56,15 +56,18 @@
                     <label>% Descuento segun tipo de pago:</label>
                     <select name="dcto_tipo_pago" id="dcto_tipo_pago" class="form-select"
                             style="background-color: #ffffff; color: #88209B;">
+                        <option value="" disabled selected readonly>Seleccione tipo de pago:</option>
                         <option value="0">Cuotas: 0</option>
                         <option value="50">Contado: 50% ($750.000)</option>
                     </select>
+
                     <input type="hidden" name="monto_pagar" value="750000">
                     <br>
                     <!-- estos descuentos y opciones son aplicados cuando se elige la opcion de cuotas -->
                     <label>% Descuento por años de egreso:</label>
                     <select name="dcto_tiempo_egreso" id="dcto_tiempo_egreso" class="form-select"
                             style="background-color: #ffffff; color: #88209B;">
+                        <option value="" disabled selected readonly>Seleccione años de egreso:</option>
                         <option value="15">1 año</option>
                         <option value="8">1 - 2 años</option>
                         <option value="4">3 - 4 años</option>
@@ -74,10 +77,12 @@
                     <label>% Descuento segun colegio de procedencia:</label>
                     <select name="dcto_colegio_procedencia" id="dcto_colegio_procedencia" class="form-select"
                             style="background-color: #ffffff; color: #88209B;">
-                        <option value="20">Municipal: 20%</option>
-                        <option value="10">Subvencionado: 10%</option>
-                        <option value="0">Privado: 0</option>
+                        <option value="" disabled selected readonly>Seleccione tipo de colegio:</option>
+                        <option value="20" data-max-cuotas="10">Municipal: 20%</option>
+                        <option value="10" data-max-cuotas="7">Subvencionado: 10%</option>
+                        <option value="0" data-max-cuotas="4">Privado: 0</option>
                     </select>
+
                     <br>
                     <div class="form-group">
                         <label>Cantidad de cuotas:</label>
@@ -118,23 +123,13 @@
                 cantidadCuotas.disabled = false;
             }
         });
-
-        // Agregar evento change al campo "Tipo de colegio de procedencia"
+     // Agregar un evento change al campo de selección de colegio de procedencia
         document.getElementById("dcto_colegio_procedencia").addEventListener("change", function () {
-            var tipoColegio = this.value;
-            var cantidadCuotas = document.getElementById("cantidad_cuotas");
+            var selectedOption = this.options[this.selectedIndex];
+            var maxCuotas = selectedOption.getAttribute("data-max-cuotas");
 
-            // Establecer los límites de cuotas según el tipo de colegio seleccionado
-            if (tipoColegio === "Municipal") {
-                cantidadCuotas.setAttribute("min", "2");
-                cantidadCuotas.setAttribute("max", "10");
-            } else if (tipoColegio === "Subvencionado") {
-                cantidadCuotas.setAttribute("min", "2");
-                cantidadCuotas.setAttribute("max", "7");
-            } else if (tipoColegio === "Privado") {
-                cantidadCuotas.setAttribute("min", "2");
-                cantidadCuotas.setAttribute("max", "4");
-            }
+            // Actualizar el atributo "max" del campo "Cantidad de cuotas" según el tipo de colegio
+            document.getElementById("cantidad_cuotas").setAttribute("max", maxCuotas);
         });
     </script>
 </body>
