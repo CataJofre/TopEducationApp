@@ -32,7 +32,7 @@ public class ArancelController {
     @PostMapping("/arancel")
     public String guardarArancel(@ModelAttribute("arancel")ArancelEntity arancel, Model model){
         arancelService.crearArancel(arancel);
-        return "generar_cuotas";
+        return "cuotas_generadas";
     }
 
 

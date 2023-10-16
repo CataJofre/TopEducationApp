@@ -27,27 +27,12 @@ public class CuotasService {
         return cuotasRepository.findAll();
     }
 
-    public Optional<CuotasEntity> getCuotaById(Long id) {
-        return cuotasRepository.findById(id);
-    }
-
-    public CuotasEntity createCuota(CuotasEntity cuota) {
-        return cuotasRepository.save(cuota);
-    }
-
-    public void deleteCuota(Long id) {
-        cuotasRepository.deleteById(id);
-    }
-    public List<CuotasEntity> obtenerCuotasPorArancel(ArancelEntity arancel) {
-        return cuotasRepository.findByArancelId(arancel.getId_arancel());
-    }
     public List<CuotasEntity> buscarCuotasPorRutEstudiante(EstudianteEntity cuotas) {
         return cuotasRepository.findByRutEstudiante(cuotas.getRut_estudiante());
     }
 
     public void generarCuotasParaEstudiante(EstudianteEntity cuotas) {
         ArancelEntity arancel = arancelRepository.findByRutEstudiante(cuotas.getRut_estudiante());
-
         if (arancel != null) {
             int cantidadCuotas = arancel.getCantidad_cuotas();
 
@@ -86,7 +71,7 @@ public class CuotasService {
         }
     }
 
-    private int obtenerInteresPorMesesAtraso(int mesesAtraso) {
+    public int obtenerInteresPorMesesAtraso(int mesesAtraso) {
         if (mesesAtraso == 1) {
             return 3; // 3% de interés para 1 mes de atraso
         } else if (mesesAtraso == 2) {
@@ -123,38 +108,11 @@ public class CuotasService {
     public void calcularDescuento(){
         pruebaService.calcularPromedioYDescuentoPorMes();
     }
-    //4
-    public LocalDate obtenerFechaUltimoPago(Long estudiante) {
-        return cuotasRepository.findMaxFechaPagoByRutEstudianteAndEstadoCuota(estudiante, "Pagada");
-    }
 
-    //5
-    public int calcularSaldoPorPagar(Long estudiante) {
 
-        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
-        if (arancel.getTipo_de_pago().equals("Contado")) {
-            return 0;
-        } else {
-            return cuotasRepository.sumSaldoPorPagar(estudiante);
-        }
-    }
-    //6
-    public int calcularNroCuotasRetraso(Long rutEstudiante) {
-        return cuotasRepository.countCuotasVencidasByRutEstudiante(rutEstudiante);
-    }
 
-    //10
-    public int calcularNroCuotasPagadas(Long rutEstudiante) {
-        return cuotasRepository.countCuotasPagadasByRutEstudiante(rutEstudiante);
-    }
-    //11
-    public int calcularMontoTotalPagado(Long estudiante) {
-        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
-        if (arancel.getTipo_de_pago().equals("Contado")) {
-            return 750000;
-        } else {
-            return cuotasRepository.sumMontoTotalPagadoByRutEstudiante(estudiante);
-        }
-    }
+
+
+
 
 }

@@ -38,14 +38,19 @@
             <h1 style="color: #88209B;">Ingrese el archivo Excel con notas</h1>
             <br>
         </div>
-        <form th:action="@{/examenes}" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".csv" />
-            <button type="submit">Cargar Archivo</button>
+        <form th:action="@{/examenes}" method="post" enctype="multipart/form-data" >
+            <div class="info-box" >
+                <p>Sube un archivo CSV</p>
+                <input type="file" name="file" accept=".csv" class="form-control" style="background-color: #ffffff; color: #88209B;">
+                <br>
+                <button type="submit" class="btn btn-success" style="background-color: #88209B; color: #ffffff;">Cargar Archivo</button>
+            </div>
         </form>
+
     </div>
     <br>
     <div class=" row">
-        <h1>Lista de todos los examenes</h1>
+        <h1 style="color: #88209B">Lista de todos los examenes</h1>
         <br>
     </div>
     <br>

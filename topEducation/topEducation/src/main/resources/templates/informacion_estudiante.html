@@ -79,8 +79,8 @@
 <br>
 <body>
 <form th:action="@{/informacion}" method="get" class="text-center">
-    <div class="input-group mb-3" style="max-width: 400px; margin: 0 auto;">
-        <input type="text" class="form-control" name="rut_estudiante" placeholder="¿Desea buscar información de un estudiante?" aria-label="Búsqueda" aria-describedby="basic-addon2" style="color: #88209B; border: none; background-color: transparent;">
+    <div class="input-group mb-3" style="max-width: 500px; margin: 0 auto;">
+        <input type="text" class="form-control" name="rut_estudiante" placeholder="¿Desea buscar información de un estudiante?" aria-label="Búsqueda" aria-describedby="basic-addon2" required pattern="\d{9}" title="Ingresa 9 dígitos" maxlength="9" style="color: #88209B; border: none; background-color: transparent;">
         <div class="input-group-append">
             <button class="btn btn-primary" type="submit" style="background-color: #88209B; color: #ffffff; border: none;">Buscar</button>
         </div>

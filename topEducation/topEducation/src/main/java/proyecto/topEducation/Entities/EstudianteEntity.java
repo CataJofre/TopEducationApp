@@ -20,7 +20,6 @@ public class EstudianteEntity {
     @Id
     @Column(unique = true, nullable = false)
     private Long rut_estudiante;
-
     private String nombres;
     private String apellidos;
     private LocalDate fecha_nacimiento;

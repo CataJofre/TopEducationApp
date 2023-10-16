@@ -17,7 +17,7 @@ public class ArancelService {
     @Autowired
     CuotasRepository cuotasRepository;
     // Operación para crear un arancel
-    public void crearArancel(ArancelEntity arancel) {
+    public ArancelEntity crearArancel(ArancelEntity arancel) {
         int dctoTipoColegio= arancel.getDcto_colegio_procedencia();
         int dctoTiempoEgreso= arancel.getDcto_tiempo_egreso();
         double descuentoTotal = 1.0 - (dctoTipoColegio / 100.0) - (dctoTiempoEgreso / 100.0);
@@ -26,43 +26,17 @@ public class ArancelService {
         arancel.setDcto_tipo_pago(0);
         arancel.setDcto_media_examenes(0);
         arancelRepository.save(arancel);
-    }
-
-
-    // Operación para eliminar un arancel por ID
-    public void eliminarArancelPorId(Long id) {
-        arancelRepository.deleteById(id);
+        return arancelRepository.save(arancel);
     }
 
     // Operación para obtener todos los aranceles
     public List<ArancelEntity> obtenerTodosLosAranceles() {
         return arancelRepository.findAll();
     }
-    public Optional<ArancelEntity> obtenerArancelPorId(Long id) {
-        return arancelRepository.findById(id);
-    }
 
-    //2
-    public String obtenerTipoPago(Long estudiante) {
-        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
-        return arancel.getTipo_de_pago();
-    }
 
-    //8
-    public int calcularMontoTotalArancel(Long estudiante) {
-        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
-        if(arancel.getTipo_de_pago().equals( "Contado")){
-            return 750000 * (1-arancel.getDcto_media_examenes()/100);
-        }
-        else{
-            return arancel.getMonto_pagar() * (1-arancel.getDcto_media_examenes()/100);
-        }
-    }
 
-    //9
-    public int obtenerNroTotalCuotasPactadas(Long estudiante) {
-        ArancelEntity arancel = arancelRepository.findByRutEstudiante(estudiante);
-        return arancel.getCantidad_cuotas();
-    }
+
+
 
 }

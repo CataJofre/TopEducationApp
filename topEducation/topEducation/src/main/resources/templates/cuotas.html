@@ -53,7 +53,7 @@
     <br>
     <form th:action="@{/buscar-cuotas}" method="get">
       <div class="input-group mb-3" style="background-color: #ffffff; border: 1px solid #88209B;">
-        <input type="text" class="form-control" name="rut_estudiante" placeholder="¿Desea buscar cuotas de un estudiante?" aria-label="Búsqueda" aria-describedby="basic-addon2" style="color: #88209B; border: none; background-color: transparent;">
+        <input type="text" class="form-control" name="rut_estudiante" placeholder="¿Desea buscar cuotas de un estudiante?" aria-label="Búsqueda" aria-describedby="basic-addon2" required pattern="\d{9}" title="Ingresa 9 dígitos" maxlength="9" style="color: #88209B; border: none; background-color: transparent;">
         <div class="input-group-append">
           <button class="btn btn-primary" type="submit" style="background-color: #88209B; color: #ffffff; border: none;">Buscar</button>
         </div>

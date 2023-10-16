@@ -27,15 +27,7 @@ public class PruebaService {
     EstudianteRepository estudianteRepository;
     @Autowired
     ArancelRepository arancelRepository;
-    public PruebaEntity crearPrueba(PruebaEntity prueba) {
-        return pruebaRepository.save(prueba);
-    }
-    public PruebaEntity obtenerPruebaPorId(Long id) {
-        return pruebaRepository.findById(id).orElse(null);
-    }
-    public PruebaEntity actualizarPrueba(PruebaEntity prueba) {
-        return pruebaRepository.save(prueba);
-    }
+
     public List<PruebaEntity> obtenerTodasLasPruebas() {
         return pruebaRepository.findAll();
     }
@@ -78,7 +70,7 @@ public class PruebaService {
         }
     }
 
-    private int calcularDescuento(double promedio) {
+    public int calcularDescuento(double promedio) {
         int descuento;
         if (promedio >= 950 && promedio <= 1000) {
             descuento = 10;
@@ -94,8 +86,5 @@ public class PruebaService {
         }
         return descuento;
     }
-
-
-
 
 }

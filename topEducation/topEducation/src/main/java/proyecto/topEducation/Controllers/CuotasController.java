@@ -23,7 +23,7 @@ public class CuotasController {
     @PostMapping("/generarCuotas")
     public String generarCuotasParaEstudiante(@RequestParam("rut_estudiante") EstudianteEntity rutEstudiante) {
         cuotasService.generarCuotasParaEstudiante(rutEstudiante);
-        return "cuotas";
+        return "cuotas_generadas";
     }
 
     @GetMapping("/buscar-cuotas")
