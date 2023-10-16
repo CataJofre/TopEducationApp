@@ -16,25 +16,25 @@ import proyecto.topEducation.Services.CuotasService;
 public class ArancelController {
     @Autowired
     ArancelService arancelService;
-@Autowired
+    @Autowired
     CuotasService cuotasService;
+
     @GetMapping({"/arancel"})
-    public String obtenerAranceles(Model modelo){
-        modelo.addAttribute("arancel",arancelService.obtenerTodosLosAranceles());
+    public String obtenerAranceles(Model modelo) {
+        modelo.addAttribute("arancel", arancelService.obtenerTodosLosAranceles());
         return "arancel";
     }
+
     @GetMapping("/arancel/nuevo")
-    public String matricularEstudianteForm(Model modelo){
-        ArancelEntity arancel= new ArancelEntity();
+    public String matricularEstudianteForm(Model modelo) {
+        ArancelEntity arancel = new ArancelEntity();
         modelo.addAttribute("arancel", arancel);
         return "arancel_descuentos";
     }
+
     @PostMapping("/arancel")
-    public String guardarArancel(@ModelAttribute("arancel")ArancelEntity arancel, Model model){
+    public String guardarArancel(@ModelAttribute("arancel") ArancelEntity arancel, Model model) {
         arancelService.crearArancel(arancel);
         return "cuotas_generadas";
     }
-
-
-
 }

@@ -7,10 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,30 +14,19 @@ import proyecto.topEducation.Entities.ArancelEntity;
 import proyecto.topEducation.Entities.EstudianteEntity;
 import proyecto.topEducation.Entities.PruebaEntity;
 import proyecto.topEducation.Repositories.ArancelRepository;
-import proyecto.topEducation.Repositories.CuotasRepository;
 import proyecto.topEducation.Repositories.EstudianteRepository;
 import proyecto.topEducation.Repositories.PruebaRepository;
-import proyecto.topEducation.Services.ArancelService;
-import proyecto.topEducation.Services.CuotasService;
-import proyecto.topEducation.Services.EstudianteService;
 import proyecto.topEducation.Services.PruebaService;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.client.ExpectedCount.times;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -49,23 +34,15 @@ import static org.springframework.test.web.client.ExpectedCount.times;
 public class PruebaTest {
     @Mock
     private EstudianteRepository estudianteRepository;
-    @InjectMocks
-    private ArancelService arancelService;
-    @InjectMocks
-    private EstudianteService estudianteService;
     @Mock
     private PruebaRepository pruebaRepository;
     @InjectMocks
     private PruebaService pruebaService;
     @Mock
-    private CuotasRepository cuotasRepository;
-    @InjectMocks
-    private CuotasService cuotasService;
-    @Mock
     private ArancelRepository arancelRepository;
 
     @Test
-    public void obtenerTodasLasPruebas(){
+    public void obtenerTodasLasPruebas() {
         PruebaEntity prueba1 = new PruebaEntity();
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
@@ -83,13 +60,14 @@ public class PruebaTest {
         assertNotNull(pruebas);
         assertEquals(2, pruebas.size());
     }
+
     @Test
     public void calcularPromedioYDescuentoPorMes() {
         when(pruebaRepository.encontrarMesMasGrande()).thenReturn(9);
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         List<PruebaEntity> pruebasMock = Arrays.asList(
-                new PruebaEntity(1L, estudiante1 ,LocalDate.of(2023, 9, 26),  900),
+                new PruebaEntity(1L, estudiante1, LocalDate.of(2023, 9, 26), 900),
                 new PruebaEntity(2L, estudiante1, LocalDate.of(2023, 9, 27), 950)
         );
         when(pruebaRepository.obtenerPruebasPorMesMasGrande(9)).thenReturn(pruebasMock);
@@ -113,4 +91,14 @@ public class PruebaTest {
         assertEquals(0, pruebaService.calcularDescuento(800));
     }
 
+    @Test
+    public void testProcesarArchivoCSV() throws IOException {
+        MultipartFile mockFile = new MockMultipartFile("test.csv", "test.csv", "text/csv", "1,123456789,750,2023-10-01\n2,123456789,890,2023-10-15\n3,234567890,680,2023-11-02\n4,345678901,925,2023-11-20\n5,456789012,720,2023-12-05\n6,456789012,850,2023-12-18\n7,567890123,550,2024-01-10\n8,678901234,950,2024-01-25\n9,890123456,800,2024-02-12".getBytes());
+        Mockito.when(pruebaRepository.saveAll(Mockito.anyList())).thenAnswer(invocation -> {
+            List<PruebaEntity> pruebas = invocation.getArgument(0);
+            return pruebas;
+        });
+        pruebaService.procesarArchivoCSV(mockFile);
+        Mockito.verify(pruebaRepository, Mockito.times(1)).saveAll(Mockito.anyList());
+    }
 }

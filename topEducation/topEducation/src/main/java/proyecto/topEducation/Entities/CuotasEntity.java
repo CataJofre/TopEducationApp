@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="cuotas")
+@Table(name = "cuotas")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +18,10 @@ public class CuotasEntity {
     @Column(unique = true, nullable = false)
     private Long id_cuotas;
     @ManyToOne
-    @JoinColumn(name ="arancelId")
+    @JoinColumn(name = "arancelId")
     private ArancelEntity arancelId;
     @ManyToOne
-    @JoinColumn(name ="rut_estudiante")
+    @JoinColumn(name = "rut_estudiante")
     private EstudianteEntity rut_estudiante;
     private String estadoCuota;
     private LocalDate fechaPago;

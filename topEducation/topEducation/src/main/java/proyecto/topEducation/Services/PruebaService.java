@@ -31,6 +31,7 @@ public class PruebaService {
     public List<PruebaEntity> obtenerTodasLasPruebas() {
         return pruebaRepository.findAll();
     }
+
     public void procesarArchivoCSV(MultipartFile file) throws IOException {
         // Leer el archivo CSV y guardar los datos en la base de datos
         List<PruebaEntity> pruebas = new ArrayList<>();
@@ -49,6 +50,7 @@ public class PruebaService {
         }
         pruebaRepository.saveAll(pruebas);
     }
+
     public void calcularPromedioYDescuentoPorMes() {
         Integer mesMasGrande = pruebaRepository.encontrarMesMasGrande();
         List<PruebaEntity> pruebas = pruebaRepository.obtenerPruebasPorMesMasGrande(mesMasGrande);
@@ -74,14 +76,11 @@ public class PruebaService {
         int descuento;
         if (promedio >= 950 && promedio <= 1000) {
             descuento = 10;
-        }
-        else if (promedio >= 900 && promedio <= 949) {
+        } else if (promedio >= 900 && promedio <= 949) {
             descuento = 5;
-        }
-        else if (promedio >= 850 && promedio <= 899) {
+        } else if (promedio >= 850 && promedio <= 899) {
             descuento = 2;
-        }
-        else {
+        } else {
             descuento = 0;
         }
         return descuento;

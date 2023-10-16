@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <title>Descuentos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../statics/css/style.css">
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-        <a class="navbar-brand" href="/" style="font-size: 2 em; font-weight: bold; color: #88209B; margin-left: 10px;">TopEducation Finanzas</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-light"
+         style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <a class="navbar-brand" href="/" style="font-size: 2 em; font-weight: bold; color: #88209B; margin-left: 10px;">TopEducation
+            Finanzas</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -27,10 +28,7 @@
         </div>
     </nav>
 </header>
-
 <br>
-
-
 <body style="background-color: #ffffff; color: #88209B; padding: 20px;">
 <div class="container">
     <div class="row">
@@ -41,7 +39,9 @@
                 <form th:action="@{/arancel}" th:object="${arancel}" method="post">
                     <div class="form-group">
                         <label style="color: #88209B;">Rut: Si el RUT termina en k, reemplazar con 0.</label>
-                        <input type="text" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control" placeholder="Rut del estudiante, sin guion" required pattern="\d{9}" title="Ingresa 9 dígitos" maxlength="9">
+                        <input type="text" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control"
+                               placeholder="Rut del estudiante, sin guion" required pattern="\d{9}"
+                               title="Ingresa 9 dígitos" maxlength="9">
                     </div>
                     <br>
                     <label>Tipo de pago:</label>
@@ -93,45 +93,41 @@
                     <br>
                     <div class="box-footer">
                         <button class="btn btn-success" style="background-color: #88209B; color: #ffffff;">Guardar
-                            datos</button>
+                            datos
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 <script>
-        // Agregar eventos change a los campos relevantes
-        document.getElementById("tipo_de_pago").addEventListener("change", function () {
-            var tipoPago = this.value;
+    // Agregar eventos change a los campos relevantes
+    document.getElementById("tipo_de_pago").addEventListener("change", function () {
+        var tipoPago = this.value;
+        var dctoTiempoEgreso = document.getElementById("dcto_tiempo_egreso");
+        var dctoColegioProcedencia = document.getElementById("dcto_colegio_procedencia");
+        var cantidadCuotas = document.getElementById("cantidad_cuotas");
+        var tipoColegioProcedencia = document.getElementById("tipo_colegio_procedencia");
 
-            // Obtener los elementos de los campos que deseas habilitar o bloquear
-            var dctoTiempoEgreso = document.getElementById("dcto_tiempo_egreso");
-            var dctoColegioProcedencia = document.getElementById("dcto_colegio_procedencia");
-            var cantidadCuotas = document.getElementById("cantidad_cuotas");
-            var tipoColegioProcedencia = document.getElementById("tipo_colegio_procedencia");
-
-            // Habilitar o bloquear los campos según la elección del usuario
-            if (tipoPago === "Contado") {
-                dctoTiempoEgreso.disabled = true;
-                dctoColegioProcedencia.disabled = true;
-                cantidadCuotas.disabled = true;
-            } else if (tipoPago === "Cuotas") {
-                dctoTiempoEgreso.disabled = false;
-                dctoColegioProcedencia.disabled = false;
-                cantidadCuotas.disabled = false;
-            }
-        });
-     // Agregar un evento change al campo de selección de colegio de procedencia
-        document.getElementById("dcto_colegio_procedencia").addEventListener("change", function () {
-            var selectedOption = this.options[this.selectedIndex];
-            var maxCuotas = selectedOption.getAttribute("data-max-cuotas");
-
-            // Actualizar el atributo "max" del campo "Cantidad de cuotas" según el tipo de colegio
-            document.getElementById("cantidad_cuotas").setAttribute("max", maxCuotas);
-        });
-    </script>
+        // Habilitar o bloquear los campos según la elección del usuario
+        if (tipoPago === "Contado") {
+            dctoTiempoEgreso.disabled = true;
+            dctoColegioProcedencia.disabled = true;
+            cantidadCuotas.disabled = true;
+        } else if (tipoPago === "Cuotas") {
+            dctoTiempoEgreso.disabled = false;
+            dctoColegioProcedencia.disabled = false;
+            cantidadCuotas.disabled = false;
+        }
+    });
+ // Agregar un evento change al campo de selección de colegio de procedencia
+    document.getElementById("dcto_colegio_procedencia").addEventListener("change", function () {
+        var selectedOption = this.options[this.selectedIndex];
+        var maxCuotas = selectedOption.getAttribute("data-max-cuotas");
+        // Actualizar el atributo "max" del campo "Cantidad de cuotas" según el tipo de colegio
+        document.getElementById("cantidad_cuotas").setAttribute("max", maxCuotas);
+    });
+</script>
 </body>
-
 </html>

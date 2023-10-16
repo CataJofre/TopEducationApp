@@ -6,8 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+
 @Entity
-@Table(name="prueba")
+@Table(name = "prueba")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class PruebaEntity {
     private Long id_prueba;
 
     @ManyToOne
-    @JoinColumn(name ="rut_estudiante")
+    @JoinColumn(name = "rut_estudiante")
     private EstudianteEntity rut_estudiante;
     private LocalDate fecha_examen;
     private int puntaje_obtenido;

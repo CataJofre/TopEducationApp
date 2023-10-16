@@ -7,12 +7,10 @@ import proyecto.topEducation.Entities.CuotasEntity;
 import proyecto.topEducation.Entities.EstudianteEntity;
 import proyecto.topEducation.Repositories.ArancelRepository;
 import proyecto.topEducation.Repositories.CuotasRepository;
-import proyecto.topEducation.Repositories.PruebaRepository;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CuotasService {
@@ -54,6 +52,7 @@ public class CuotasService {
         }
 
     }
+
     public void procesarCuotasVencidas() {
         LocalDate fechaActual = LocalDate.now();
         List<CuotasEntity> cuotasPendientes = cuotasRepository.findByEstadoCuota("Pendiente"); // Obtener cuotas pendientes
@@ -62,12 +61,12 @@ public class CuotasService {
             int mesesAtraso = Period.between(fechaPago, fechaActual).getMonths();
             if (mesesAtraso > 0) {
                 int interesPorcentaje = obtenerInteresPorMesesAtraso(mesesAtraso);
-                int valorConInteres = cuota.getValor_de_cuota()+cuota.getValor_de_cuota()*interesPorcentaje/100;
+                int valorConInteres = cuota.getValor_de_cuota() + cuota.getValor_de_cuota() * interesPorcentaje / 100;
                 cuota.setInteres_aplicado(interesPorcentaje);
                 cuota.setValor_de_cuota(valorConInteres);
                 cuota.setEstadoCuota("Vencida");
             }
-            cuotasRepository.save(cuota); // Guardar la cuota actualizada en la base de datos
+            cuotasRepository.save(cuota);
         }
     }
 
@@ -82,6 +81,7 @@ public class CuotasService {
             return 15; // 15% de interés para más de 3 meses de atraso
         }
     }
+
     public void registrarPago(List<Long> cuotasPagadasIds) {
         for (Long cuotaId : cuotasPagadasIds) {
             CuotasEntity cuota = cuotasRepository.findById(cuotaId).orElse(null);
@@ -92,6 +92,7 @@ public class CuotasService {
             }
         }
     }
+
     public void aplicarDescuentosEnCuotasPendientes() {
         List<CuotasEntity> cuotasPendientes = cuotasRepository.findByEstadoCuota("Pendiente");
         for (CuotasEntity cuota : cuotasPendientes) {
@@ -105,14 +106,9 @@ public class CuotasService {
         }
     }
 
-    public void calcularDescuento(){
+    public void calcularDescuento() {
         pruebaService.calcularPromedioYDescuentoPorMes();
     }
-
-
-
-
-
 
 
 }

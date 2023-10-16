@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import org.springframework.boot.test.context.SpringBootTest;
 import proyecto.topEducation.Entities.ArancelEntity;
@@ -18,11 +18,8 @@ import proyecto.topEducation.Repositories.ArancelRepository;
 import proyecto.topEducation.Repositories.CuotasRepository;
 import proyecto.topEducation.Repositories.EstudianteRepository;
 import proyecto.topEducation.Repositories.PruebaRepository;
-import proyecto.topEducation.Services.CuotasService;
 import proyecto.topEducation.Services.EstudianteService;
 
-
-import static org.assertj.core.api.Assertions.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -45,13 +42,11 @@ public class EstudianteTest {
     private PruebaRepository pruebaRepository;
     @Mock
     private CuotasRepository cuotasRepository;
-    @InjectMocks
-    private CuotasService cuotasService;
     @Mock
     private ArancelRepository arancelRepository;
 
     @Test
-    public void encontrarEstudiantePorId(){
+    public void encontrarEstudiantePorId() {
         EstudianteService estudianteService = Mockito.mock(EstudianteService.class);
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
@@ -64,12 +59,12 @@ public class EstudianteTest {
         estudiante1.setPromedio(890);
         when(estudianteService.findEstudiantePorId(2013301789L)).thenReturn(estudiante1);
         EstudianteEntity estudiante2 = estudianteService.findEstudiantePorId(2013301789L);
-        assertEquals(estudiante2.getRut_estudiante(),  estudiante1.getRut_estudiante());
+        assertEquals(estudiante2.getRut_estudiante(), estudiante1.getRut_estudiante());
         assertEquals(estudiante2.getNombres(), estudiante1.getNombres());
     }
+
     @Test
     public void obtenerEstudiantes() {
-        // Crear un estudiante de ejemplo
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
@@ -84,9 +79,9 @@ public class EstudianteTest {
         List<EstudianteEntity> resultado = estudianteService.obtenerEstudiantes();
         assertEquals(1, resultado.size());
     }
+
     @Test
     public void crearEstudiante() {
-
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
@@ -97,7 +92,6 @@ public class EstudianteTest {
         estudiante1.setTipo_colegio("Municipal1");
         estudiante1.setPromedio(890);
         Mockito.when(estudianteRepository.save(Mockito.any(EstudianteEntity.class))).thenReturn(estudiante1);
-
         EstudianteEntity resultado = estudianteService.crearEstudiante(estudiante1);
         assertEquals(resultado.getRut_estudiante(), estudiante1.getRut_estudiante());
     }
@@ -113,12 +107,11 @@ public class EstudianteTest {
         estudiante1.setNombre_colegio("Liceo Tajamar");
         estudiante1.setTipo_colegio("Municipal");
         estudiante1.setPromedio(890);
-
         Mockito.when(estudianteRepository.findEstudiantePorId(estudiante1.getRut_estudiante())).thenReturn(estudiante1);
-
         double promedio = estudianteService.obtenerPromedioPuntajeExamenes(estudiante1.getRut_estudiante());
         assertEquals(890, promedio, 0.0);
     }
+
     @Test
     public void obtenerPromedioExamen2() {
         EstudianteEntity estudiante1 = new EstudianteEntity();
@@ -129,17 +122,13 @@ public class EstudianteTest {
         estudiante1.setEgreso_colegio(2017);
         estudiante1.setNombre_colegio("Liceo Tajamar");
         estudiante1.setTipo_colegio("Municipal");
-
-        // Configura el comportamiento del repositorio simulado
         Mockito.when(estudianteRepository.findEstudiantePorId(estudiante1.getRut_estudiante())).thenReturn(estudiante1);
-
         double promedio = estudianteService.obtenerPromedioPuntajeExamenes(estudiante1.getRut_estudiante());
         assertEquals(0.0, promedio);
     }
 
     @Test
     public void obtenerNombreEstudiante() {
-        // Configura el comportamiento del repositorio simulado
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
@@ -149,12 +138,11 @@ public class EstudianteTest {
         estudiante1.setNombre_colegio("Liceo Tajamar");
         estudiante1.setTipo_colegio("Municipal");
         estudiante1.setPromedio(890);
-
         Mockito.when(estudianteRepository.findEstudiantePorId(Mockito.anyLong())).thenReturn(estudiante1);
-
         String nombre = estudianteService.obtenerNombreEstudiante(estudiante1.getRut_estudiante());
         assertEquals("Marta Sanchez", nombre);
     }
+
     @Test
     public void calcularNroExamenesRendidos() {
         EstudianteEntity estudiante1 = new EstudianteEntity();
@@ -178,8 +166,8 @@ public class EstudianteTest {
     }
 
     @Test
-    public void obtenerFechaUltimoPago(){
-      EstudianteEntity estudiante1 = new EstudianteEntity();
+    public void obtenerFechaUltimoPago() {
+        EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
         estudiante1.setApellidos("Sanchez");
@@ -188,8 +176,8 @@ public class EstudianteTest {
         estudiante1.setNombre_colegio("Liceo Tajamar");
         estudiante1.setTipo_colegio("Municipal");
         estudiante1.setPromedio(890);
-      ArancelEntity arancel= new ArancelEntity();
-      arancel.setId_arancel(1L);
+        ArancelEntity arancel = new ArancelEntity();
+        arancel.setId_arancel(1L);
         arancel.setTipo_de_pago("Cuotas");
         arancel.setRut_estudiante(estudiante1);
         arancel.setDcto_tipo_pago(0);
@@ -198,7 +186,6 @@ public class EstudianteTest {
         arancel.setDcto_tiempo_egreso(0);
         arancel.setDcto_colegio_procedencia(20);
         arancel.setCantidad_cuotas(2);
-
         CuotasEntity cuota1 = new CuotasEntity();
         cuota1.setArancelId(arancel);
         cuota1.setRut_estudiante(estudiante1);
@@ -209,7 +196,6 @@ public class EstudianteTest {
         cuota1.setCuotas_pagadas(1);
         cuota1.setValor_de_cuota(60000);
         cuota1.setDcto_media_examenes(0);
-
         CuotasEntity cuota2 = new CuotasEntity();
         cuota2.setArancelId(arancel);
         cuota2.setRut_estudiante(estudiante1);
@@ -220,14 +206,14 @@ public class EstudianteTest {
         cuota2.setCuotas_pagadas(1);
         cuota2.setValor_de_cuota(60000);
         cuota2.setDcto_media_examenes(0);
-      when(cuotasRepository.findMaxFechaPagoByRutEstudianteAndEstadoCuota(2013301789L, "Pagada"))
-              .thenReturn(cuota2.getFechaPago());
-        LocalDate fecha= estudianteService.obtenerFechaUltimoPago(2013301789L);
+        when(cuotasRepository.findMaxFechaPagoByRutEstudianteAndEstadoCuota(2013301789L, "Pagada"))
+                .thenReturn(cuota2.getFechaPago());
+        LocalDate fecha = estudianteService.obtenerFechaUltimoPago(2013301789L);
         assertEquals(LocalDate.of(2023, 11, 15), fecha);
     }
 
     @Test
-    public void calcularSaldoPorPagar(){
+    public void calcularSaldoPorPagar() {
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
@@ -237,7 +223,7 @@ public class EstudianteTest {
         estudiante1.setNombre_colegio("Liceo Tajamar");
         estudiante1.setTipo_colegio("Municipal");
         estudiante1.setPromedio(890);
-        ArancelEntity arancel= new ArancelEntity();
+        ArancelEntity arancel = new ArancelEntity();
         arancel.setId_arancel(1L);
         arancel.setTipo_de_pago("Cuotas");
         arancel.setRut_estudiante(estudiante1);
@@ -286,7 +272,6 @@ public class EstudianteTest {
         assertEquals(800000, saldo);
     }
 
-
     @Test
     public void calcularSaldoPorPagar2() {
         EstudianteEntity estudiante1 = new EstudianteEntity();
@@ -314,7 +299,7 @@ public class EstudianteTest {
     }
 
     @Test
-    public void calcularNroCuotasRetraso(){
+    public void calcularNroCuotasRetraso() {
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
@@ -324,7 +309,7 @@ public class EstudianteTest {
         estudiante1.setNombre_colegio("Liceo Tajamar");
         estudiante1.setTipo_colegio("Municipal");
         estudiante1.setPromedio(890);
-        ArancelEntity arancel= new ArancelEntity();
+        ArancelEntity arancel = new ArancelEntity();
         arancel.setId_arancel(1L);
         arancel.setTipo_de_pago("Cuotas");
         arancel.setRut_estudiante(estudiante1);
@@ -370,7 +355,7 @@ public class EstudianteTest {
     }
 
     @Test
-    public void calcularNroCuotasPagadas(){
+    public void calcularNroCuotasPagadas() {
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
@@ -380,7 +365,7 @@ public class EstudianteTest {
         estudiante1.setNombre_colegio("Liceo Tajamar");
         estudiante1.setTipo_colegio("Municipal");
         estudiante1.setPromedio(890);
-        ArancelEntity arancel= new ArancelEntity();
+        ArancelEntity arancel = new ArancelEntity();
         arancel.setId_arancel(1L);
         arancel.setTipo_de_pago("Cuotas");
         arancel.setRut_estudiante(estudiante1);
@@ -426,7 +411,7 @@ public class EstudianteTest {
     }
 
     @Test
-    public void calcularMontoTotalPagado(){
+    public void calcularMontoTotalPagado() {
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
@@ -436,7 +421,7 @@ public class EstudianteTest {
         estudiante1.setNombre_colegio("Liceo Tajamar");
         estudiante1.setTipo_colegio("Municipal");
         estudiante1.setPromedio(890);
-        ArancelEntity arancel= new ArancelEntity();
+        ArancelEntity arancel = new ArancelEntity();
         arancel.setId_arancel(1L);
         arancel.setTipo_de_pago("Cuotas");
         arancel.setRut_estudiante(estudiante1);
@@ -481,8 +466,10 @@ public class EstudianteTest {
         int cuotas = estudianteService.calcularMontoTotalPagado(2013301789L);
         assertEquals(800000, cuotas);
     }
+
     @Test
-    public void calcularMontoTotalPagado2(){  EstudianteEntity estudiante1 = new EstudianteEntity();
+    public void calcularMontoTotalPagado2() {
+        EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
         estudiante1.setApellidos("Sanchez");
@@ -505,8 +492,10 @@ public class EstudianteTest {
         int monto = estudianteService.calcularMontoTotalPagado(2013301789L);
         assertEquals(750000, monto);
     }
+
     @Test
-    public void obtenerTipoPago(){  EstudianteEntity estudiante1 = new EstudianteEntity();
+    public void obtenerTipoPago() {
+        EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
         estudiante1.setApellidos("Sanchez");
@@ -526,11 +515,13 @@ public class EstudianteTest {
         arancel.setDcto_colegio_procedencia(20);
         arancel.setCantidad_cuotas(3);
         when(arancelRepository.findByRutEstudiante(2013301789L)).thenReturn(arancel);
-       String pago = estudianteService.obtenerTipoPago(2013301789L);
+        String pago = estudianteService.obtenerTipoPago(2013301789L);
         assertEquals("Cuotas", pago);
     }
+
     @Test
-    public void obtenerNroTotalCuotasPactadas(){  EstudianteEntity estudiante1 = new EstudianteEntity();
+    public void obtenerNroTotalCuotasPactadas() {
+        EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
         estudiante1.setApellidos("Sanchez");
@@ -553,8 +544,10 @@ public class EstudianteTest {
         int pago = estudianteService.obtenerNroTotalCuotasPactadas(2013301789L);
         assertEquals(3, pago);
     }
+
     @Test
-    public void calcularMontoTotalArancel(){  EstudianteEntity estudiante1 = new EstudianteEntity();
+    public void calcularMontoTotalArancel() {
+        EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
         estudiante1.setApellidos("Sanchez");
@@ -577,8 +570,10 @@ public class EstudianteTest {
         int pago = estudianteService.calcularMontoTotalArancel(2013301789L);
         assertEquals(1500000, pago);
     }
+
     @Test
-    public void calcularMontoTotalArancel2(){  EstudianteEntity estudiante1 = new EstudianteEntity();
+    public void calcularMontoTotalArancel2() {
+        EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
         estudiante1.setApellidos("Sanchez");

@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <title>Registrar estudiante</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../statics/css/style.css">
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-        <a class="navbar-brand" href="/" style="font-size: 2 em; font-weight: bold; color: #88209B; margin-left: 10px;">TopEducation Finanzas</a>
+    <nav class="navbar navbar-expand-lg navbar-light"
+         style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <a class="navbar-brand" href="/" style="font-size: 2 em; font-weight: bold; color: #88209B; margin-left: 10px;">TopEducation
+            Finanzas</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -30,65 +33,77 @@
 
 <br>
 <body>
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-md-10 col-sm-10 container justify-content-center card" style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-                <br>
-                <h1 class="text-center" style="color: #88209B;">Registro de estudiantes</h1>
-                <div class="card-body">
-                    <form th:action="@{/estudiantes}" th:object="${estudiante}" method="post">
-                        <div class="form-group">
-                            <label style="color: #88209B;">Nombres:</label>
-                            <input type="text" name="nombres" th:field="*{nombres}" class="form-control" placeholder="Nombres del estudiante" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label style="color: #88209B;">Apellidos:</label>
-                            <input type="text" name="apellidos" th:field="*{apellidos}" class="form-control" placeholder="Apellidos del estudiante" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label style="color: #88209B;">Rut: Si el RUT termina en k, reemplazar con 0.</label>
-                            <input type="text" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control" placeholder="Rut del estudiante, sin guion" required pattern="\d{9}" title="Ingresa 9 dígitos" maxlength="9">
-                        </div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10 container justify-content-center card"
+             style="background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+            <br>
+            <h1 class="text-center" style="color: #88209B;">Registro de estudiantes</h1>
+            <div class="card-body">
+                <form th:action="@{/estudiantes}" th:object="${estudiante}" method="post">
+                    <div class="form-group">
+                        <label style="color: #88209B;">Nombres:</label>
+                        <input type="text" name="nombres" th:field="*{nombres}" class="form-control"
+                               placeholder="Nombres del estudiante" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #88209B;">Apellidos:</label>
+                        <input type="text" name="apellidos" th:field="*{apellidos}" class="form-control"
+                               placeholder="Apellidos del estudiante" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #88209B;">Rut: Si el RUT termina en k, reemplazar con 0.</label>
+                        <input type="text" name="rut_estudiante" th:field="*{rut_estudiante}" class="form-control"
+                               placeholder="Rut del estudiante, sin guion" required pattern="\d{9}"
+                               title="Ingresa 9 dígitos" maxlength="9">
+                    </div>
 
-                        <br>
-                        <div class="form-group">
-                            <label style="color: #88209B;">Fecha de nacimiento:</label>
-                            <input type="date" name="fecha_nacimiento" th:field="*{fecha_nacimiento}" class="form-control" placeholder="Fecha de nacimiento del estudiante" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label style="color: #88209B;">Tipo de colegio de procedencia:</label>
-                            <select name="tipo_colegio" id="tipo_colegio" class="form-select">
-                                <option value="" selected disabled>Seleccione tipo de colegio</option>
-                                <option value="Municipal">Municipal</option>
-                                <option value="Subvencionado">Subvencionado</option>
-                                <option value="Privado">Privado</option>
-                            </select>
-                        </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #88209B;">Fecha de nacimiento:</label>
+                        <input type="date" name="fecha_nacimiento" th:field="*{fecha_nacimiento}" class="form-control"
+                               placeholder="Fecha de nacimiento del estudiante" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #88209B;">Tipo de colegio de procedencia:</label>
+                        <select name="tipo_colegio" id="tipo_colegio" class="form-select">
+                            <option value="" selected disabled>Seleccione tipo de colegio</option>
+                            <option value="Municipal">Municipal</option>
+                            <option value="Subvencionado">Subvencionado</option>
+                            <option value="Privado">Privado</option>
+                        </select>
+                    </div>
 
-                        <br>
-                        <div class="form-group">
-                            <label style="color: #88209B;">Nombre del colegio de procedencia:</label>
-                            <input type="text" name="nombre_colegio" th:field="*{nombre_colegio}" class="form-control" placeholder="Nombre de colegio" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label style="color: #88209B;">Año de egreso escolar:</label>
-                            <input type="text" name="egreso_colegio" th:field="*{egreso_colegio}" class="form-control" placeholder="Año de egreso" required pattern="\d{4}" title="Ingresa 4 dígitos numéricos" maxlength="4">
-                        </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #88209B;">Nombre del colegio de procedencia:</label>
+                        <input type="text" name="nombre_colegio" th:field="*{nombre_colegio}" class="form-control"
+                               placeholder="Nombre de colegio" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #88209B;">Año de egreso escolar:</label>
+                        <input type="text" name="egreso_colegio" th:field="*{egreso_colegio}" class="form-control"
+                               placeholder="Año de egreso" required pattern="\d{4}" title="Ingresa 4 dígitos numéricos"
+                               maxlength="4">
+                    </div>
 
-                        <br>
-                        <div class="box-footer">
-                            <button class="btn btn-success" style="background-color: #88209B; color: #ffffff; border: none;">Seleccionar Medio de pago</button>
-                        </div>
-                    </form>
-                </div>
+                    <br>
+                    <div class="box-footer">
+                        <button class="btn btn-success"
+                                style="background-color: #88209B; color: #ffffff; border: none;">Seleccionar Medio de
+                            pago
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 </body>
 

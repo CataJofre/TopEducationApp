@@ -23,18 +23,18 @@ public class PruebaController {
     public String mostrarNotasDeExamenes(Model model) {
         List<PruebaEntity> examen = pruebaService.obtenerTodasLasPruebas();
         model.addAttribute("examen", examen);
-        return "examenes"; // Nombre de la vista HTML
+        return "examenes";
     }
+
     @PostMapping("/examenes")
     public String procesarArchivo(@RequestParam("file") MultipartFile file) {
         try {
             pruebaService.procesarArchivoCSV(file);
-            return "redirect:/examenes"; // Página de éxito
+            return "redirect:/examenes";
         } catch (Exception e) {
-            e.printStackTrace(); // Agrega esta línea para imprimir la excepción
-            return "redirect:/error"; // Página de error
+            e.printStackTrace();
+            return "redirect:/error";
         }
     }
-
 
 }

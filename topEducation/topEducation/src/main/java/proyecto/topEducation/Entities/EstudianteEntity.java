@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="estudiante")
+@Table(name = "estudiante")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +27,6 @@ public class EstudianteEntity {
     private String nombre_colegio;
     private String tipo_colegio;
     private double promedio;
-
 
     public EstudianteEntity(String rutEstudiante) {
         this.rut_estudiante = Long.parseLong(rutEstudiante);

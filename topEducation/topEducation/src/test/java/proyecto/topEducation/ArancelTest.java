@@ -7,20 +7,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import proyecto.topEducation.Entities.ArancelEntity;
 import proyecto.topEducation.Entities.EstudianteEntity;
 import proyecto.topEducation.Repositories.ArancelRepository;
-import proyecto.topEducation.Repositories.CuotasRepository;
-import proyecto.topEducation.Repositories.EstudianteRepository;
-import proyecto.topEducation.Repositories.PruebaRepository;
+
 import proyecto.topEducation.Services.ArancelService;
-import proyecto.topEducation.Services.CuotasService;
-import proyecto.topEducation.Services.EstudianteService;
+
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -33,18 +27,9 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 @Transactional
 public class ArancelTest {
-    @Mock
-    private EstudianteRepository estudianteRepository;
+
     @InjectMocks
     private ArancelService arancelService;
-    @InjectMocks
-    private EstudianteService estudianteService;
-    @Mock
-    private PruebaRepository pruebaRepository;
-    @Mock
-    private CuotasRepository cuotasRepository;
-    @InjectMocks
-    private CuotasService cuotasService;
     @Mock
     private ArancelRepository arancelRepository;
 
@@ -74,8 +59,9 @@ public class ArancelTest {
         List<ArancelEntity> resultado = arancelService.obtenerTodosLosAranceles();
         assertEquals(1, resultado.size());
     }
+
     @Test
-    public void crearArancel(){
+    public void crearArancel() {
         EstudianteEntity estudiante1 = new EstudianteEntity();
         estudiante1.setRut_estudiante(2013301789L);
         estudiante1.setNombres("Marta");
@@ -96,8 +82,7 @@ public class ArancelTest {
         arancel.setDcto_colegio_procedencia(20);
         arancel.setCantidad_cuotas(3);
         Mockito.when(arancelRepository.save(Mockito.any(ArancelEntity.class))).thenReturn(arancel);
-
-       ArancelEntity resultado = arancelService.crearArancel(arancel);
+        ArancelEntity resultado = arancelService.crearArancel(arancel);
         assertEquals(resultado.getMonto_pagar(), resultado.getMonto_pagar());
     }
 
