@@ -55,7 +55,7 @@ public class CuotasController {
     }
     @GetMapping("/generar")
     public String generarCuotas(){
-        return "generar_cuotas";
+        return "cuotas";
     }
     @GetMapping("/pagar")
     public String registrarPagoCuotas() {
