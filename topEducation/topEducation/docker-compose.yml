@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  postgresql-db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DATABASE: "TopEducation"
+    ports:
+      - "5432:5432"
+  app:
+    container_name: topeducationapp
+    image: catajofrel/topeducationapp
+    ports:
+      - "8989:8989"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql-db:5432/TopEducation?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - postgresql-db

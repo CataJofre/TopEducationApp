@@ -53,7 +53,10 @@ public class CuotasController {
         model.addAttribute("cuotas", cuotas);
         return "pagar_cuotas";
     }
-
+    @GetMapping("/generar")
+    public String generarCuotas(){
+        return "generar_cuotas";
+    }
     @GetMapping("/pagar")
     public String registrarPagoCuotas() {
         return "pagar";

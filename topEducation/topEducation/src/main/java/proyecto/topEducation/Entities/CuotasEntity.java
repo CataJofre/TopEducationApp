@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CuotasEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false)
     private Long id_cuotas;
     @ManyToOne
